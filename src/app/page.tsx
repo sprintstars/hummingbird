@@ -1,10 +1,35 @@
+import React from "react";
+import SvgLogo from "@/components/ui/footerLogo";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 export default function Home() {
 	return (
 		<div>
-			<div className="lg: container mx-auto h-screen max-w-8xl sm:px-6 pt-4">
+			<div className="lg: container mx-auto h-screen max-w-8xl sm:px-4 pt-4">
 				<div className="grid grid-cols-3 gap-4">
 					<div className="grid grid-cols-1 gap-4">
-						<div>Dropdown component</div>
+						<div className="my-8">
+							<DropdownMenu>
+								<DropdownMenuTrigger>Filter</DropdownMenuTrigger>
+								<DropdownMenuContent>
+									<DropdownMenuLabel>Alphabetical</DropdownMenuLabel>
+									<DropdownMenuSeparator />
+									<DropdownMenuItem>
+										Ascending Healthy to Unhealthy
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										Desending Unhealthy to Healthy
+									</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
+						</div>
 						<div className="">
 							<button
 								type="button"
@@ -26,12 +51,13 @@ export default function Home() {
 							</button>
 						</div>
 					</div>
-					<div className="... col-span-2 m-auto text-white">
-						<div className="mb-4">Distruptions 1</div>
-						<div className="mb-4">Recently Resolved 2</div>
-						<div className="mb-4">Fully Operational 3</div>
+					<div className="... col-span-2 m-auto">
+						<div className="mb-4 text-red-500">Distruptions 1</div>
+						<div className="mb-4 text-white">Recently Resolved 2</div>
+						<div className="mb-4 text-white">Fully Operational 3</div>
 					</div>
 				</div>
+				<SvgLogo />
 			</div>
 		</div>
 	);
