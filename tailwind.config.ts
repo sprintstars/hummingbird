@@ -8,6 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        ib: "inset 0 -1em 0.3em -0.5em rgb(0 0 0 / 30%)",
+      },
+
+      colors: {
+        "service-healthy": "#B6EB9D",
+        "service-unhealthy": "#FECDCD",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
