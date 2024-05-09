@@ -14,18 +14,18 @@ const services = [
     name: "Sentry",
     healthy: false,
   },
-  {
-    name: "Azure",
-    healthy: true,
-  },
-  {
-    name: "Supabase",
-    healthy: false,
-  },
-  {
-    name: "Clerk",
-    healthy: false,
-  },
+  // {
+  //   name: "Azure",
+  //   healthy: true,
+  // },
+  // {
+  //   name: "Supabase",
+  //   healthy: false,
+  // },
+  // {
+  //   name: "Clerk",
+  //   healthy: false,
+  // },
 ];
 
 export default function Home() {

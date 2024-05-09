@@ -18,19 +18,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} flex flex-col h-screen bg-footer bg-app-background`}
+        className={`${inter.className} grid grid-cols-6 grid-rows-[3.5rem_2rem_1fr_1fr_1fr_15vh] gap-x-10 gap-y-4 h-screen bg-footer bg-app-background`}
       >
-        <header className="text-slate-50">
+        <header className="col-span-6 text-slate-50">
           <div>Person</div>
         </header>
         {children}
-        <Image
-          className="absolute bottom-0 right-0"
-          src="./logo.svg"
-          alt="Hummingbird logo"
-          width={128}
-          height={128}
-        />
+        <div className="relative col-start-6 row-start-6">
+          <Image
+            src="./logo.svg"
+            alt="Hummingbird logo"
+            fill={true}
+          />
+        </div>
       </body>
     </html>
   );

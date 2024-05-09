@@ -40,10 +40,10 @@ const ServiceHealth = (props: Readonly<ServiceHealthProps>) => {
     <div
       className={`${
         props.healthy ? "bg-emerald-400" : "bg-red-400"
-      } flex max-w-md align-middle p-4 rounded-3xl flex-1`}
+      } flex h-min max-w-md align-middle p-4 rounded-3xl w-full`}
     >
       {props.healthy ? healthyIcon : unhealthyIcon}
-      <span className="block tracking-widest flex-1 mx-6 text-center rounded-md bg-slate-200/50">
+      <span className="block flex-1 tracking-widest content-center mx-6 text-center rounded-md bg-slate-200/50">
         {props.name}
       </span>
     </div>
