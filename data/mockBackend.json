@@ -1,0 +1,19 @@
+
+  {
+    "netlify": {
+      "name": "netlify",
+      "timestamp": "<Date.now()>",
+      "healthy": true
+    },
+    "auth0": {
+      "name": "auth0",
+      "timestamp": "<Date.now()>",
+      "healthy": false
+    },
+    "twilio": {
+      "name": "twilio",
+      "timestamp": "<Date.now()>",
+      "healthy": true
+    }
+  }
+
