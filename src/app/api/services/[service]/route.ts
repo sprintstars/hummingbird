@@ -45,7 +45,7 @@ export const GET = async (
 
 type ServiceHealth = Pick<Service, "healthy">;
 
-export const isServiceHealth: Validator<ServiceHealth> = (
+const isServiceHealth: Validator<ServiceHealth> = (
   o: any,
 ): o is ServiceHealth =>
   typeof o.healthy === "boolean" && Object.keys(o).length === 1;
