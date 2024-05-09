@@ -8,24 +8,18 @@ const ServicesContainer = (props: Readonly<ServiceContainerProps>) => {
   return (
     <>
       <div className="col-start-1 col-span-2">Filtering Area</div>
-      <div className="col-start-1 col-span-3 row-span-3 shadow-ib overflow-y-auto">
+      <div className="col-start-1 col-span-3 row-span-3 overflow-y-auto">
         <ServiceList list={props.list} />
       </div>
       {/* Details */}
-      <div className="text-3xl col-start-4 col-span-2 text-slate-200">
-        Disruptions
+      <div className="grid grid-cols-2 col-start-4 col-span-3 row-start-3 row-span-3 text-3xl text-slate-200">
+        <div>Disruptions</div>
+        <div>1</div>
+        <div>Recently Resolved</div>
+        <div>0</div>
+        <div>Fully Operational</div>
+        <div>3</div>
       </div>
-      <div className="text-3xl col-start-6 text-slate-200">1</div>
-
-      <div className="text-3xl col-start-4 col-span-2 text-slate-200">
-        Recently Resolved
-      </div>
-      <div className="text-3xl col-start-6 text-slate-200">0</div>
-
-      <div className="text-3xl col-start-4 col-span-2 text-slate-200">
-        Fully Operational
-      </div>
-      <div className="text-3xl col-start-6 text-slate-200">3</div>
     </>
   );
 };

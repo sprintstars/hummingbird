@@ -12,7 +12,7 @@ type ServiceListProps = {
 
 const ServiceList = (props: Readonly<ServiceListProps>) => {
   return (
-    <div className="flex flex-col px-6 gap-3 h-full items-center">
+    <div className="flex flex-col px-6 gap-3 h-full items-center shadow-ib self-center min-w-80">
       {props.list.map((service, i) => (
         <ServiceHealth
           key={service.name + i}
