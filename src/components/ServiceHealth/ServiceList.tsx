@@ -1,7 +1,7 @@
 import ServiceHealth from "./ServiceHealth";
 
 //specifically type things at top level
-type ServiceStatus = {
+export type ServiceStatus = {
   name: string;
   healthy: boolean;
 };
