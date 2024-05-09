@@ -11,6 +11,8 @@ const jsonLocation = "./data/mockBackend.json";
 
 type ReqOptions = { params: { service: string } };
 
+const headers = { "Content-Type": "application/json" };
+
 export const GET = async (
   _: Request,
   { params }: ReqOptions,
@@ -20,13 +22,14 @@ export const GET = async (
     const services = tryParseJson<Service[]>(data, isServicesArray);
     const service = services?.find((s) => s.name === params.service);
     if (service) {
-      return new Response(makeResponseBody("ok", service));
+      return new Response(makeResponseBody("ok", service), { headers });
     }
     return new Response(
       makeResponseBody(
         "not found",
         `Could not find the sevice called ${params.service}`,
       ),
+      { headers },
     );
   } catch (e) {
     const message = e instanceof Error ? e.message : "Oops!";
@@ -35,6 +38,7 @@ export const GET = async (
         "error",
         message,
       ),
+      { headers },
     );
   }
 };
@@ -57,6 +61,7 @@ export const PUT = async (req: Request, { params }: ReqOptions) => {
           "error",
           `There was a problem parsing the services data`,
         ),
+        { headers },
       );
     }
 
@@ -70,6 +75,7 @@ export const PUT = async (req: Request, { params }: ReqOptions) => {
           "not found",
           `Could not find the service called ${params.service}`,
         ),
+        { headers },
       );
     }
 
@@ -85,6 +91,7 @@ export const PUT = async (req: Request, { params }: ReqOptions) => {
           "error",
           `There was a problem parsing the body of the request`,
         ),
+        { headers },
       );
     }
 
@@ -104,7 +111,7 @@ export const PUT = async (req: Request, { params }: ReqOptions) => {
       "utf-8",
     );
 
-    return new Response(makeResponseBody("ok", newService));
+    return new Response(makeResponseBody("ok", newService), { headers });
   } catch (e) {
     const message = e instanceof Error ? e.message : "Oops!";
     return new Response(
@@ -112,6 +119,7 @@ export const PUT = async (req: Request, { params }: ReqOptions) => {
         "error",
         message,
       ),
+      { headers },
     );
   }
 };
