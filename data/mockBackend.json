@@ -1,17 +1,1 @@
-[
-  {
-    "name": "netlify",
-    "timestamp": 1715267889275,
-    "healthy": true
-  },
-  {
-    "name": "auth0",
-    "timestamp": 1722812400000,
-    "healthy": false
-  },
-  {
-    "name": "twilio",
-    "timestamp": 1725490800000,
-    "healthy": true
-  }
-]
+[{"name":"netlify","timestamp":1715272492681,"healthy":true},{"name":"auth0","timestamp":1722812400000,"healthy":false},{"name":"twilio","timestamp":1725490800000,"healthy":true}]
