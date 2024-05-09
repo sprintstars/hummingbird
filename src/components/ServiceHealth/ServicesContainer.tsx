@@ -6,24 +6,21 @@ type ServiceContainerProps = {
 
 const ServicesContainer = (props: Readonly<ServiceContainerProps>) => {
   return (
-    <div className="grid grid-cols-6 grid-rows-[60px 240px] text-white">
-      <div className="col-start-1 col-end-2 ...">Filtering Area</div>
-      <div className="col-start-1 col-end-2 ...">
-        Service List area
+    <div className="flex-1 grid grid-cols-6 grid-rows-[60px_1fr_1fr_1fr_1fr_1fr] text-white gap-6">
+      <div className="col-start-1 col-span-2">Filtering Area</div>
+      <div className="col-start-1 col-span-2 row-span-5">
         <ServiceList list={props.list} />
       </div>
-      <div className="col-start-3 col-span-2 ">
-        <div className="grid grid-cols-2 grid-rows-3 gap-6">
-          <div className="text-3xl">Disruptions</div>
-          <div className="text-3xl">1</div>
+      {/* Details */}
 
-          <div className="text-3xl">Recently Resolved</div>
-          <div className="text-3xl">0</div>
+      <div className="text-3xl col-start-3 col-span-2">Disruptions</div>
+      <div className="text-3xl col-start-5">1</div>
 
-          <div className="text-3xl">Fully Operational</div>
-          <div className="text-3xl">3</div>
-        </div>
-      </div>
+      <div className="text-3xl col-start-3 col-span-2">Recently Resolved</div>
+      <div className="text-3xl col-start-5">0</div>
+
+      <div className="text-3xl col-start-3 col-span-2">Fully Operational</div>
+      <div className="text-3xl col-start-5">3</div>
     </div>
   );
 };

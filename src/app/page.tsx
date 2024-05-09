@@ -1,5 +1,4 @@
 import React from "react";
-import SvgLogo from "@/components/ui/footerLogo";
 import { ServicesContainer } from "@/components/ServiceHealth";
 
 const services = [
@@ -33,8 +32,6 @@ export default function Home() {
   return (
     <>
       <ServicesContainer list={services} />
-
-      <SvgLogo />
     </>
   );
 }

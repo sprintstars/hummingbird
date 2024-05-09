@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +16,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-[#0c1567]">
-      <body className={`${inter.className} p-4`}>{children}</body>
+    <html lang="en">
+      <body
+        className={`${inter.className} flex flex-col h-screen bg-footer bg-app-background`}
+      >
+        <header className="text-slate-50">
+          <div>Person</div>
+        </header>
+        {children}
+        <Image
+          className="absolute bottom-0 right-0"
+          src="./logo.svg"
+          alt="Hummingbird logo"
+          width={128}
+          height={128}
+        />
+      </body>
     </html>
   );
 }
