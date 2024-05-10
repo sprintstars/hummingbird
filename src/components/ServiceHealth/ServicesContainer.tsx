@@ -1,14 +1,15 @@
 import ServiceList, { type ServiceStatus } from "./ServiceList";
 import { type Service } from "@/lib/util";
+const address = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/services`;
 
 const ServicesContainer = async () => {
-  const response = await fetch("http://localhost:3000/api/services/");
+  const response = await fetch(address);
   const body = await response.json();
   const services: Service[] = body.payload;
 
   const disruptions = services.reduce(
     (sum, service) => (service.healthy ? sum : sum + 1),
-    0
+    0,
   );
 
   return (
@@ -37,7 +38,7 @@ const ServicesContainer = async () => {
         <span className="flex items-center">
           {services.reduce(
             (sum, service) => (service.healthy ? sum + 1 : sum),
-            0
+            0,
           )}
         </span>
       </div>
