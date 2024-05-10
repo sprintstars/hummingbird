@@ -1,4 +1,4 @@
-export type Validator<T> = (o: any) => o is T;
+export type Validator<T> = (obj: any) => obj is T;
 
 export const tryParseJson = <T>(
   jsonStr: string,
