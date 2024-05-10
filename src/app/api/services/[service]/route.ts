@@ -20,7 +20,9 @@ export const GET = async (
   try {
     const data = await fs.readFile(jsonLocation, "utf-8");
     const services = tryParseJson<Service[]>(data, isServicesArray);
-    const service = services?.find((s) => s.name === params.service);
+    const service = services?.find((serviceObject) =>
+      serviceObject.name === params.service
+    );
     if (service) {
       return new Response(makeResponseBody("ok", service), { headers });
     }
