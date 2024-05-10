@@ -29,7 +29,7 @@ export const GET = async (
     return new Response(
       makeResponseBody(
         "not found",
-        `Could not find the sevice called ${params.service}`,
+        `Could not find the service called ${params.service}`,
       ),
       { headers },
     );
