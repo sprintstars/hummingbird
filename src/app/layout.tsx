@@ -30,14 +30,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} ${palanquin.variable} ${museoModerno.variable} grid grid-cols-6 grid-rows-[3.5rem_2rem_1fr_1fr_1fr_15vh] gap-x-10 gap-y-4 h-screen bg-footer bg-app-background font-palanquin`}
+        className={`${inter.className} ${palanquin.variable} ${museoModerno.variable} grid grid-cols-6 grid-rows-[3.5rem_2rem_10rem_10rem_1fr_20vh] md:grid-rows-[3.5rem_2rem_1fr_1fr_1fr_10vh_10vh] gap-x-2 gap-y-3 h-auto md:h-screen bg-footer bg-app-background font-palanquin`}
       >
-        <header className="col-span-6 text-slate-50">
-          <div>Person</div>
+        <header className="col-start-6 px-4 py-2 text-slate-50">
+          <div className="h-10 w-10 float-right rounded-full border border-slate-600 bg-slate-700">
+          </div>
         </header>
         {children}
-        <div className="relative col-start-6 row-start-6">
-          <Image src="./logo.svg" alt="Hummingbird logo" fill={true} />
+        <div className="relative col-start-5 col-span-2 md:col-start-6 md:col-span-1 row-start-6 row-span-2">
+          <Image
+            src="./logo.svg"
+            alt="Hummingbird logo"
+            priority={false}
+            fill={true}
+          />
         </div>
       </body>
     </html>

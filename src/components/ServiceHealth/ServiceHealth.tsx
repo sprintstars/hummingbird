@@ -9,7 +9,7 @@ const healthyIcon = (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="green"
-    className="size-6"
+    className="size-10 my-1"
   >
     <path
       fillRule="evenodd"
@@ -24,9 +24,9 @@ const unhealthyIcon = (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="red"
-    stroke="black"
+    stroke="#444"
     strokeWidth="0.7"
-    className="w-6 h-6"
+    className="size-10 my-1"
   >
     <path
       fillRule="evenodd"
@@ -41,10 +41,10 @@ const ServiceHealth = (props: Readonly<ServiceHealthProps>) => {
     <div
       className={`${
         props.healthy ? "bg-emerald-400" : "bg-red-400"
-      } flex h-min max-w-md align-middle p-4 rounded-3xl w-full`}
+      } flex items-center max-w-md pl-6 pr-12 rounded-3xl min-w-96`}
     >
       {props.healthy ? healthyIcon : unhealthyIcon}
-      <span className="block flex-1 tracking-widest content-center mx-6 text-center rounded-md bg-slate-200/50">
+      <span className="block flex-1 tracking-widest content-center mx-6 text-center h-full text-2xl">
         {props.name}
       </span>
     </div>
