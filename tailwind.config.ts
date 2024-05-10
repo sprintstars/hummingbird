@@ -18,11 +18,16 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        museoModerno: "var(--font-museo-moderno)",
+        palanquin: "var(--font-palanquin)",
+      },
+
       boxShadow: {
         ib: "inset 0 -1em 0.3em -0.5em rgb(0 0 0 / 30%)",
       },
       backgroundImage: {
-        "footer":
+        footer:
           "linear-gradient(354deg, rgb(221, 221, 221) 20vh, rgb(9, 9, 121) 20.3vh)",
       },
       colors: {
