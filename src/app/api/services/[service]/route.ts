@@ -67,8 +67,8 @@ export const PUT = async (req: Request, { params }: ReqOptions) => {
       );
     }
 
-    const serviceIndexToUpdate = services.findIndex((s) =>
-      s.name === params.service
+    const serviceIndexToUpdate = services.findIndex((serviceObject) =>
+      serviceObject.name === params.service
     );
 
     if (serviceIndexToUpdate < 0) {
