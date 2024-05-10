@@ -10,7 +10,7 @@ const ServicesContainer = (props: Readonly<ServiceContainerProps>) => {
       <div className="col-start-1 col-span-2">Filtering Area</div>
       <div
         className={`col-start-1 col-span-3 row-span-3 overflow-y-auto ${
-          props.list.length > 7 ? "shadow-ib" : ""
+          props.list.length > 8 ? "shadow-ib" : ""
         }`}
       >
         <ServiceList list={props.list} />
