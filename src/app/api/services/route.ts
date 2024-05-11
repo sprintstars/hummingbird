@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import path from "node:path";
 import {
   isServicesArray,
   makeResponseBody,
@@ -6,7 +7,7 @@ import {
   tryParseJson,
 } from "@/lib/util";
 
-const jsonLocation = "./data/mockBackend.json";
+const jsonLocation = path.resolve("data/mockBackend.json");
 const headers = { "Content-Type": "application/json" };
 
 export const GET = async (req: Request) => {
