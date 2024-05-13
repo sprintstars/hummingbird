@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import path from "node:path";
 import {
   isServicesArray,
   makeResponseBody,
@@ -7,10 +8,9 @@ import {
   type Validator,
 } from "@/lib/util";
 
-const jsonLocation = "./data/mockBackend.json";
-
 type ReqOptions = { params: { service: string } };
 
+const jsonLocation = path.resolve("data/mockBackend.json");
 const headers = { "Content-Type": "application/json" };
 
 export const GET = async (
