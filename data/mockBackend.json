@@ -1,7 +1,1 @@
-[
-  { "name": "netlify", "timestamp": 1715272492681, "healthy": true },
-  { "name": "auth0", "healthy": true, "timestamp": 1715606563820 },
-  { "name": "twilio", "healthy": true, "timestamp": 1715606564056 },
-  { "name": "google", "healthy": true, "timestamp": 1715606564366 },
-  { "name": "sentry", "healthy": true, "timestamp": 1715606677188 }
-]
+[{"name":"netlify","timestamp":1715272492681,"healthy":true},{"name":"auth0","healthy":true,"timestamp":1715609323723},{"name":"twilio","healthy":true,"timestamp":1715609323730},{"name":"google","healthy":true,"timestamp":1715609323730},{"name":"sentry","healthy":true,"timestamp":1715609323734}]

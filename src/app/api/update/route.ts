@@ -1,38 +1,82 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import {
-  isServicesArray,
-  makeResponseBody,
-  type Service,
-  tryParseJson,
-} from "@/lib/util";
-import { timeStamp } from "node:console";
+import { isServicesArray, type Service, tryParseJson } from "@/lib/util";
 
 const jsonLocation = path.resolve("data/mockBackend.json");
 
-const urls = [
+type ServiceEndpoints = {
+  name: string;
+  url: string;
+  strategy: "ping";
+};
+
+const urls: ServiceEndpoints[] = [
   {
     name: "netflify",
     url: "https://www.netlifystatus.com/",
+    strategy: "ping",
   },
   {
     name: "auth0",
     url: "https://status.auth0.com/",
+    strategy: "ping",
   },
   {
     name: "twilio",
     url: "https://status.twilio.com/",
+    strategy: "ping",
   },
   {
     name: "google",
-    url: "https://www.google.com/",
+    url: "http://localhost:3000/api/fakeService",
+    strategy: "ping",
   },
   {
     name: "sentry",
     url: "https://status.sentry.io/",
+    strategy: "ping",
   },
 ];
 
+const ping = async (url: string) => {
+  const response = await fetch(url);
+  return response.ok;
+};
+
+const strategies = {
+  ping,
+};
+
+const readServices = async (filePath: string) => {
+  try {
+    const data = await fs.readFile(filePath, "utf-8");
+    const services = tryParseJson<Service[]>(data, isServicesArray);
+    return services;
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Oops!";
+    console.log(message);
+    return null;
+  }
+};
+
+const writeServices = async (services: Service[]) => {
+  try {
+    return fs.writeFile(jsonLocation, JSON.stringify(services), "utf-8");
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Oops!";
+    console.log(message);
+    return;
+  }
+};
+
+type Strategy = (url: string) => Promise<boolean>;
+
+const getHealth = (strategy: Strategy, url: string) => {
+  return strategy(url);
+};
+
+// When the CRON runs this handler
+// Update the health on the mock backend.json
 export const GET = async (req: Request) => {
   if (
     req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`
@@ -40,57 +84,44 @@ export const GET = async (req: Request) => {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  // When the CRON runs this handler
-  // Update the health on the mock backend.json
+  const services = await readServices(jsonLocation);
+
+  if (services === null) {
+    console.log("There was an error while reading the backend");
+    return;
+  }
 
   // Get the name by looping through the array
   for (let i = 0; i < urls.length; i++) {
     const name = urls[i].name;
     const url = urls[i].url;
 
-    console.log(name, url);
+    const strategy = strategies[urls[i].strategy];
 
-    const pingResponse = await fetch(url);
-    const healthy = pingResponse.ok;
+    // PGet the health of the endpoint
+    const healthy = await getHealth(strategy, url);
 
-    console.log(healthy);
-
-    updateHealth(name, healthy);
+    // run the update health function
+    updateHealth(services, name, healthy);
   }
 
+  await writeServices(services);
   return new Response("ok");
-
-  // Ping the URL associated with that name
-  // if the response is status 200 then
-  // healthy = true
-  // else healthy = false
-  // run the update health function
 };
 
-const updateHealth = async (name: string, healthy: boolean) => {
-  try {
-    const data = await fs.readFile(jsonLocation, "utf-8");
-    const services = tryParseJson<Service[]>(data, isServicesArray);
+const updateHealth = async (
+  services: Service[],
+  name: string,
+  healthy: boolean,
+) => {
+  const serviceIndexToUpdate = services.findIndex(
+    (serviceObject) => serviceObject.name === name,
+  );
 
-    if (services === null) {
-      return console.log("There was a problem parsing the services data");
-    }
-
-    const serviceIndexToUpdate = services.findIndex(
-      (serviceObject) => serviceObject.name === name
-    );
-
-    if (serviceIndexToUpdate < 0) {
-      return console.log(`Could not find the service called ${name}`);
-    }
-
-    const updatedService = { name, healthy, timestamp: Date.now() };
-
-    services[serviceIndexToUpdate] = updatedService;
-
-    await fs.writeFile(jsonLocation, JSON.stringify(services), "utf-8");
-  } catch (e) {
-    const message = e instanceof Error ? e.message : "Oops!";
-    return console.log(message);
+  if (serviceIndexToUpdate < 0) {
+    return console.log(`Could not find the service called ${name}`);
   }
+
+  const updatedService = { name, healthy, timestamp: Date.now() };
+  services[serviceIndexToUpdate] = updatedService;
 };
