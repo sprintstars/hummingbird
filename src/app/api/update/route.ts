@@ -1,5 +1,5 @@
 import db from "@/lib/db";
-import { isServiceEnpointArray, type Service, type ServiceEndpoint } from "@/lib/utils";
+import { isServiceEnpointArray } from "@/lib/utils";
 
 type StrategyFunction = (url: string) => Promise<boolean>;
 
