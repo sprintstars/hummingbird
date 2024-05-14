@@ -1,11 +1,16 @@
+import { readFileSync } from "fs";
 import pg from "pg";
 
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL_NO_SSL,
+  database: process.env.POSTGRES_DATABASE,
+  host: process.env.POSTGRES_HOST,
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  port: 6543,
   ssl: {
-    rejectUnauthorized: false,
+    ca: readFileSync("./supabase.crt"),
   },
 });
 

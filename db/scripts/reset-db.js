@@ -26,7 +26,7 @@ const schema = {
 const tables = Object.keys(schema);
 const tableKeyValuePairs = Object.entries(schema);
 
-const resetDB = async () => {
+const destroyTables = async () => {
   try {
     let sql = "";
     for (const table of tables) {

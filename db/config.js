@@ -1,23 +1,24 @@
-// import { readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import pg from "pg";
 import env from "@next/env";
 
 const projectDir = process.cwd();
 env.loadEnvConfig(projectDir, true);
 
-// const cert = readFileSync("./supabase.crt", "utf-8");
-// console.log(cert)
-
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL_NO_SSL,
+  database: process.env.POSTGRES_DATABASE,
+  host: process.env.POSTGRES_HOST,
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  port: 6543,
   ssl: {
-    rejectUnauthorized: false,
+    ca: readFileSync("./supabase.crt"),
   },
 });
 
 pool.on("error", (err) => console.error(err));
-pool.on("connect", () => console.log("connected to the database"));
+pool.on("connect", () => console.log("Connected to the database"));
 
 export default pool;
