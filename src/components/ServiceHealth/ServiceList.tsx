@@ -12,7 +12,7 @@ const ServiceList = (props: Readonly<ServiceListProps>) => {
         <ServiceHealth
           key={service.name + i}
           name={service.name}
-          timestamp={service.timestamp}
+          timestamp={service.time}
           healthy={service.healthy}
         />
       ))}
