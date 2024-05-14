@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seeder": "node ./db/scripts/seeder.js"
+    "reset-db": "node ./db/scripts/reset-db.js"
   },
   "dependencies": {
     "@next/env": "^14.2.3",
