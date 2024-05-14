@@ -5,7 +5,7 @@ import {
   makeResponseBody,
   type Service,
   tryParseJson,
-} from "@/lib/util";
+} from "@/lib/utils";
 
 const jsonLocation = path.resolve("data/mockBackend.json");
 const headers = { "Content-Type": "application/json" };

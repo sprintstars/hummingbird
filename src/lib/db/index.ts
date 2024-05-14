@@ -1,15 +1,13 @@
 import pg from "pg";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
+  connectionString: process.env.POSTGRES_URL_NO_SSL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
-
-console.log(process.env.POSTGRES_URL);
 
 pool.on("error", (err) => console.error(err));
 pool.on("connect", () => console.log("connected to the database"));

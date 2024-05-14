@@ -8,9 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seeder": "node -r dotenv/config ./data/seeder.js"
+    "seeder": "node ./db/scripts/seeder.js"
   },
   "dependencies": {
+    "@next/env": "^14.2.3",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "dotenv": "^16.4.5",

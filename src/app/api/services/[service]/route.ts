@@ -6,7 +6,7 @@ import {
   type Service,
   tryParseJson,
   type Validator,
-} from "@/lib/util";
+} from "@/lib/utils";
 
 type ReqOptions = { params: { service: string } };
 
