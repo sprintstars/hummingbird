@@ -1,35 +1,10 @@
 import db from "../config.js";
-import SERVICE_SEED_DATA from "../seed/services.js";
-import STATUS_HISTORY_SEED_DATA from "../seed/status_history.js";
+import { tables, tableSpecPairs } from "../schema.js"
 
 const wait = (ms) =>
   new Promise((res, _) => {
     setTimeout(res, ms);
   });
-
-const schema = {
-  services: {
-    columns: [
-      { name: "id", constraints: "serial PRIMARY KEY" },
-      { name: "name", constraints: "varchar(50)" },
-      { name: "url", constraints: "text" },
-      { name: "strategy", constraints: "varchar(16)" },
-    ],
-    seed: SERVICE_SEED_DATA,
-  },
-  status_history: {
-    columns: [
-      { name: "id", constraints: "serial PRIMARY KEY" },
-      { name: "service_id", constraints: "integer REFERENCES services(id)" },
-      { name: "healthy", constraints: "boolean" },
-      { name: "time", constraints: "timestamp DEFAULT CURRENT_TIMESTAMP" },
-    ],
-    seed: STATUS_HISTORY_SEED_DATA,
-  },
-};
-
-const tables = Object.keys(schema);
-const tableKeyValuePairs = Object.entries(schema);
 
 const destroyTables = async () => {
   let sql = "";
@@ -41,7 +16,7 @@ const destroyTables = async () => {
 
 const createTables = async () => {
   let sql = "";
-  for (const [table, spec] of tableKeyValuePairs) {
+  for (const [table, spec] of tableSpecPairs) {
     sql += `CREATE TABLE ${table} (${spec.columns
       .map((col) => `${col.name} ${col.constraints}`)
       .join(", ")});\n`;
@@ -50,7 +25,7 @@ const createTables = async () => {
 };
 
 const seedData = async () => {
-  for (const [table, spec] of tableKeyValuePairs) {
+  for (const [table, spec] of tableSpecPairs) {
     let sql = "";
     let allValues = [];
     let count = 0;
