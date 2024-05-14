@@ -1,6 +1,6 @@
 const SERVICE_SEED_DATA = [
   {
-    name: "netflify",
+    name: "netlify",
     url: "https://www.netlifystatus.com/",
     strategy: "ping",
   },

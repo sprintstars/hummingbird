@@ -1,6 +1,6 @@
 type ServiceHealthProps = {
   name: string;
-  timestamp: number;
+  timestamp: Date;
   healthy: boolean;
 };
 

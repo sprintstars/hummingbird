@@ -44,7 +44,7 @@ const seedData = async () => {
             `The schema for ${table}/${col} did not match a column specified in the seed data`
           );
         }
-        return typeof value === "string" ? `'${value}'` : value;
+        return value
       });
 
       allValues = allValues.concat(values);
