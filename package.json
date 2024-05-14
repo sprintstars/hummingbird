@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "reset-db": "node ./db/scripts/reset-db.js"
+    "reset-db": "node ./db/scripts/reset-db.js",
+    "test-db": "node ./db/scripts/test-connection.js"
   },
   "dependencies": {
     "@next/env": "^14.2.3",

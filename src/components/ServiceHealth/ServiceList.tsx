@@ -1,5 +1,5 @@
 import ServiceHealth from "./ServiceHealth";
-import { type Service } from "@/lib/util";
+import { type Service } from "@/lib/utils";
 
 type ServiceListProps = {
   list: Service[];

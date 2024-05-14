@@ -1,6 +1,11 @@
-import pool from "../config.js";
+import db from "../config.js";
 import SERVICE_SEED_DATA from "../seed/services.js";
 import STATUS_HISTORY_SEED_DATA from "../seed/status_history.js";
+
+const wait = (ms) =>
+  new Promise((res, _) => {
+    setTimeout(res, ms);
+  });
 
 const schema = {
   services: {
@@ -27,64 +32,72 @@ const tables = Object.keys(schema);
 const tableKeyValuePairs = Object.entries(schema);
 
 const destroyTables = async () => {
-  try {
-    let sql = "";
-    for (const table of tables) {
-      sql += `DROP TABLE IF EXISTS ${table} CASCADE;\n`;
-    }
-    pool.query(sql);
-  } catch (e) {
-    console.log("Error destroying tables");
-    console.error(e);
+  let sql = "";
+  for (const table of tables) {
+    sql += `DROP TABLE IF EXISTS ${table} CASCADE;\n`;
   }
+  return db.query(sql);
 };
 
 const createTables = async () => {
-  try {
-    let sql = "";
-    for (const [table, spec] of tableKeyValuePairs) {
-      sql += `CREATE TABLE ${table} (${spec.columns
-        .map((col) => `${col.name} ${col.constraints}`)
-        .join(", ")});\n`;
-    }
-    // console.log(sql);
-    pool.query(sql);
-  } catch (e) {
-    console.log("Error creating tables");
-    console.error(e);
+  let sql = "";
+  for (const [table, spec] of tableKeyValuePairs) {
+    sql += `CREATE TABLE ${table} (${spec.columns
+      .map((col) => `${col.name} ${col.constraints}`)
+      .join(", ")});\n`;
   }
+  return db.query(sql);
 };
 
 const seedData = async () => {
-  try {
+  for (const [table, spec] of tableKeyValuePairs) {
     let sql = "";
-    for (const [table, spec] of tableKeyValuePairs) {
-      for (const row of spec.seed) {
-        sql += `INSERT INTO ${table} (${spec.columns
-          .map((col) => col.name)
-          .join(", ")}) VALUES (${Object.keys(row).map(
-          (_, index) => `$${index + 1}`
-        )});\n`;
-      }
+    let allValues = [];
+    let count = 0;
+
+    const columns = spec.columns
+      .filter(({ name }) => name !== "id")
+      .map(({ name }) => name);
+
+    sql += `INSERT INTO ${table} (${columns.join(", ")}) VALUES `;
+
+    for (const row of spec.seed) {
+      const values = columns.map((col) => {
+        const value = row[col];
+        if (value === undefined) {
+          throw new Error(
+            `The schema for ${table}/${col} did not match a column specified in the seed data`
+          );
+        }
+        return typeof value === "string" ? `'${value}'` : value;
+      });
+
+      allValues = allValues.concat(values);
+
+      const colCount = columns.length;
+      const subs = Array.from({ length: colCount }).map(
+        (_, index) => `$${index + 1 + count}`
+      );
+      count += colCount;
+
+      sql += `(${subs.join(", ")}),\n`;
     }
-    console.log(sql);
-    pool.query(sql);
-  } catch (e) {
-    console.log("Error seeding data");
-    console.error(e);
+    sql = sql.substring(0, sql.length - 2) + ";\n";
+    await db.query(sql, allValues);
   }
 };
 
-const resetDatabase = async () => {
-  try {
-    await destroyTables();
-    await createTables();
-    await seedData();
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await pool.end();
-  }
-};
-
-await resetDatabase();
+try {
+  await destroyTables();
+  console.log("Destroying tables...");
+  await wait(100);
+  console.log("Recreating tables...");
+  await createTables();
+  await wait(100);
+  console.log("Seeding data...");
+  await seedData();
+} catch (e) {
+  console.error(e);
+} finally {
+  await db.end();
+}

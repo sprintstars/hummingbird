@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import ServiceList from "./ServiceList";
 import ServiceDetails from "./ServiceDetails";
-import { type Service } from "@/lib/util";
+import { type Service } from "@/lib/utils";
 
 const address = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/services`;
 
@@ -11,17 +11,11 @@ const ServicesContainer = () => {
   const [services, setServices] = useState<Service[] | null>(null);
 
   const disruptions = services
-    ? services.reduce(
-      (sum, service) => (service.healthy ? sum : sum + 1),
-      0,
-    )
+    ? services.reduce((sum, service) => (service.healthy ? sum : sum + 1), 0)
     : 0;
 
   const operational = services
-    ? services.reduce(
-      (sum, service) => (service.healthy ? sum + 1 : sum),
-      0,
-    )
+    ? services.reduce((sum, service) => (service.healthy ? sum + 1 : sum), 0)
     : 0;
 
   const fetchData = useCallback(async () => {
@@ -45,9 +39,11 @@ const ServicesContainer = () => {
         Ordering & Filtering
       </div>
       <div className="col-start-1 col-span-6 md:col-span-3 row-start-5 row-span-1 md:row-start-3 md:row-span-4">
-        {services
-          ? <ServiceList list={services} />
-          : <div className="text-slate-200 w-[25rem] mx-auto">Loading...</div>}
+        {services ? (
+          <ServiceList list={services} />
+        ) : (
+          <div className="text-slate-200 w-[25rem] mx-auto">Loading...</div>
+        )}
       </div>
       <ServiceDetails disruptions={disruptions} operational={operational} />
     </>
