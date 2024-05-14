@@ -1,14 +1,8 @@
 import ServiceHealth from "./ServiceHealth";
-
-//specifically type things at top level
-export type ServiceStatus = {
-  name: string;
-  timestamp: number;
-  healthy: boolean;
-};
+import { type Service } from "@/lib/util";
 
 type ServiceListProps = {
-  list: ServiceStatus[];
+  list: Service[];
 };
 
 const ServiceList = (props: Readonly<ServiceListProps>) => {

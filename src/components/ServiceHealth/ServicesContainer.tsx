@@ -1,7 +1,8 @@
 "use client";
 
-import { Suspense, useCallback, useEffect, useState } from "react";
-import ServiceList, { type ServiceStatus } from "./ServiceList";
+import { useCallback, useEffect, useState } from "react";
+import ServiceList from "./ServiceList";
+import ServiceDetails from "./ServiceDetails";
 import { type Service } from "@/lib/util";
 
 const address = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/services`;
@@ -48,27 +49,7 @@ const ServicesContainer = () => {
           ? <ServiceList list={services} />
           : <div className="text-slate-200 w-[25rem] mx-auto">Loading...</div>}
       </div>
-      {/* Details */}
-      <div className="font-museoModerno grid grid-cols-[3fr_1fr] text-right mx-auto md:grid-cols-2 col-start-1 col-span-6 md:col-start-4 md:col-span-3 gap-[5vh] row-start-3 row-span-2 md:row-start-3 md:row-span-3 px-10 content-around text-3xl text-slate-200">
-        <span
-          className={disruptions > 0 ? "text-red-400 font-bold underline" : ""}
-        >
-          Disruptions
-        </span>
-        <span
-          className={`flex items-center ${
-            disruptions > 0 ? "text-red-400 font-bold" : ""
-          }`}
-        >
-          {disruptions}
-        </span>
-        <span>Recently Resolved</span>
-        <span className="flex items-center">0</span>
-        <span>Fully Operational</span>
-        <span className="flex items-center">
-          {operational}
-        </span>
-      </div>
+      <ServiceDetails disruptions={disruptions} operational={operational} />
     </>
   );
 };
