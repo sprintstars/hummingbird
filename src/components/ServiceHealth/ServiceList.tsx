@@ -6,9 +6,13 @@ type ServiceListProps = {
 };
 
 const ServiceList = (props: Readonly<ServiceListProps>) => {
+  const sortedList = [...props.list].sort((a, b) =>
+    a.healthy === b.healthy ? 0 : a.healthy ? 1 : -1
+  );
+
   return (
     <div className="flex flex-col w-[25rem] gap-3 h-full mx-auto items-center overflow-y-auto">
-      {props.list.map((service, i) => (
+      {sortedList.map((service, i) => (
         <ServiceHealth
           key={service.name + i}
           name={service.name}
