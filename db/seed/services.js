@@ -1,27 +1,27 @@
 const SERVICE_SEED_DATA = [
   {
     name: "netlify",
-    url: "https://www.netlifystatus.com/",
+    url: "https://portfolio.minegarde.city/api/services/1",
     strategy: "ping",
   },
   {
     name: "auth0",
-    url: "https://status.auth0.com/",
+    url: "https://portfolio.minegarde.city/api/services/2",
     strategy: "ping",
   },
   {
     name: "twilio",
-    url: "https://status.twilio.com/",
+    url: "https://portfolio.minegarde.city/api/services/3",
     strategy: "ping",
   },
   {
     name: "google",
-    url: "http://localhost:3000/api/fakeService",
+    url: "https://portfolio.minegarde.city/api/services/4",
     strategy: "ping",
   },
   {
     name: "sentry",
-    url: "https://status.sentry.io/",
+    url: "https://portfolio.minegarde.city/api/services/5",
     strategy: "ping",
   },
 ];
