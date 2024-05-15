@@ -33,13 +33,12 @@ const getHealth = (strategy: StrategyFunction, url: string) => {
 };
 
 // When the CRON runs this handler
-// Update the health on the mock backend.json
+// Append a status_history row for each service in services
 export const GET = async (req: Request) => {
-  let sql = "INSERT INTO status_history (service_id, healthy, time) VALUES ";
-
   if (req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`) {
     return new Response("Unauthorized", { status: 401 });
   }
+  let sql = "INSERT INTO status_history (service_id, healthy, time) VALUES ";
 
   const endpoints = await getEndpoints();
 
@@ -71,7 +70,11 @@ export const GET = async (req: Request) => {
 
   sql += subs.join(", ");
   // Append to status_history
-  await db.query(sql, values);
-
-  return new Response("ok");
+  try {
+    await db.query(sql, values);
+    return new Response("ok");
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Oops!";
+    return new Response(message, { status: 500 });
+  }
 };
