@@ -1,4 +1,5 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import pg from "pg";
 
 const { Pool } = pg;
@@ -10,7 +11,7 @@ const pool = new Pool({
   password: process.env.POSTGRES_PASSWORD,
   port: 6543,
   ssl: {
-    ca: readFileSync("./supabase.crt"),
+    ca: readFileSync(resolve("cert/supabase.crt")),
   },
 });
 
