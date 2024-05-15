@@ -1,5 +1,3 @@
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
 import pg from "pg";
 import env from "@next/env";
 
@@ -11,7 +9,7 @@ const { Pool } = pg;
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL_NO_SSL,
   ssl: {
-    ca: readFileSync(resolve("cert/supabase.crt")),
+    ca: process.env.SUPABASE_CERT,
   },
 });
 
