@@ -4,7 +4,7 @@ import { isServiceEnpointArray } from "@/lib/utils";
 type StrategyFunction = (url: string) => Promise<boolean>;
 
 const ping = async (url: string) => {
-  const response = await fetch(url);
+  const response = await fetch(url, { cache: "no-cache" });
   return response.ok;
 };
 

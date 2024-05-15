@@ -1,5 +1,5 @@
 import db from "@/lib/db";
-import { isServicesArray, makeResponseBody, type Service, type Validator } from "@/lib/utils";
+import { isServicesArray, makeResponseBody } from "@/lib/utils";
 
 type ReqOptions = { params: { id: string } };
 
