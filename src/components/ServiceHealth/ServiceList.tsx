@@ -3,20 +3,25 @@ import { type Service } from "@/lib/utils";
 
 type ServiceListProps = {
   list: Service[];
+  sortHealthyFirst?: boolean; // add sort order group
 };
 
-const ServiceList = (props: Readonly<ServiceListProps>) => {
-  const sortedList = [...props.list].sort((a, b) => {
-    if (a.healthy === b.healthy) {
-      // If they do, they are considered equal in terms of sorting
-      return 0;
-    } else {
-      // If 'a' is healthy and 'b' is not, 'a' should come after 'b'
-      if (a.healthy) {
+const ServiceList = ({ list, sortHealthyFirst }: ServiceListProps) => {
+  const sortedList = [...list].sort((a, b) => {
+    if (sortHealthyFirst) {
+      if (a.healthy === b.healthy) {
+        return 0;
+      } else if (a.healthy && !b.healthy) {
+        return -1;
+      } else {
         return 1;
       }
-      // If 'b' is healthy and 'a' is not, 'a' should come before 'b'
-      else {
+    } else {
+      if (a.healthy === b.healthy) {
+        return 0;
+      } else if (a.healthy && !b.healthy) {
+        return 1;
+      } else {
         return -1;
       }
     }
