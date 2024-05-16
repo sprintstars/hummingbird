@@ -24,22 +24,3 @@ export default async function StatusDetailsView({ params }: { params: { id: stri
     </>
   );
 }
-
-// import StatusDetails from "@/components/ServiceHealth/ServiceStatusDetails";
-// import Link from "next/link";
-
-// const wait = (ms: number) =>
-//   new Promise((res, _) => {
-//     setTimeout(res, ms);
-//   });
-
-// export default async function StatusDetailsView({ params }: { params: { id: string } }) {
-//   await wait(3000);
-//   return (
-//     <>
-//       <main className="flex-[2] rounded-md text-slate-900">
-//         <StatusDetails id={Number(params.id)} />
-//       </main>
-//     </>
-//   );
-// }
