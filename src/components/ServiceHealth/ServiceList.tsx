@@ -3,27 +3,25 @@ import { type Service } from "@/lib/utils";
 
 type ServiceListProps = {
   list: Service[];
-  sortHealthyFirst?: boolean; // add sort order group
+
+  selectedFilter: string;
 };
 
-const ServiceList = ({ list, sortHealthyFirst }: ServiceListProps) => {
+const ServiceList = ({ list, selectedFilter }: ServiceListProps) => {
   const sortedList = [...list].sort((a, b) => {
-    if (sortHealthyFirst) {
-      if (a.healthy === b.healthy) {
-        return 0;
-      } else if (a.healthy && !b.healthy) {
+    if (a.healthy === b.healthy) {
+      return 0;
+    }
+    if (selectedFilter === "healthy first") {
+      if (a.healthy && !b.healthy) {
         return -1;
-      } else {
-        return 1;
       }
+      return 1;
     } else {
-      if (a.healthy === b.healthy) {
-        return 0;
-      } else if (a.healthy && !b.healthy) {
+      if (a.healthy && !b.healthy) {
         return 1;
-      } else {
-        return -1;
       }
+      return -1;
     }
   });
 
