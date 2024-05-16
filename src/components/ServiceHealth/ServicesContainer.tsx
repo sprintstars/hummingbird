@@ -11,6 +11,11 @@ const address = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/services`;
 const ServicesContainer = () => {
   const [services, setServices] = useState<Service[] | null>(null);
   const [selectedFilter, setSelectedFilter] = useState("unhealthy first");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredServices = services?.filter((service) =>
+    service.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const disruptions = services
     ? services.reduce((sum, service) => (service.healthy ? sum : sum + 1), 0)
@@ -38,6 +43,13 @@ const ServicesContainer = () => {
   return (
     <>
       <div className="col-start-2 col-span-4 md:col-start-1 md:col-span-3 md:mx-12  ">
+        <input
+          type="text"
+          placeholder="Search services..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
         <QuickFilterButton
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
@@ -53,8 +65,8 @@ const ServicesContainer = () => {
       </div>
 
       <div className="col-start-1 col-span-6 md:col-span-3 row-start-5 row-span-1 md:row-start-3 md:row-span-4">
-        {services ? (
-          <ServiceList list={services} selectedFilter={selectedFilter} />
+        {filteredServices ? (
+          <ServiceList list={filteredServices} selectedFilter={selectedFilter} />
         ) : (
           <div className="text-slate-200 w-[25rem] mx-auto">Loading...</div>
         )}
