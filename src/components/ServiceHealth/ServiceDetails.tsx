@@ -4,29 +4,22 @@ import { useState } from "react"; // Import useState directly
 interface ServiceDetailsProps {
   disruptions: number;
   operational: number;
-  onOperationalClick: () => void; // added click handler prop
-  onDisruptionsClick: () => void; // added click handler prop
+  setSelectedFilter: (value: string) => void; // added selectedFilter prop
+  selectedFilter: string;
 }
 
 const ServiceDetails: FunctionComponent<ServiceDetailsProps> = ({
   disruptions,
   operational,
-  onOperationalClick,
-  onDisruptionsClick,
+  setSelectedFilter,
+  selectedFilter,
 }) => {
-  const [isDisruptionsClicked, setIsDisruptionsClicked] = useState(false);
-  const [isOperationalClicked, setIsOperationalClicked] = useState(false);
-
   const handleDisruptionsClick = () => {
-    onDisruptionsClick();
-    setIsDisruptionsClicked(true);
-    setIsOperationalClicked(false); // Un-underline Operational
+    setSelectedFilter("unhealthy first"); // Call setSelectedFilter
   };
 
   const handleOperationalClick = () => {
-    onOperationalClick();
-    setIsOperationalClicked(true);
-    setIsDisruptionsClicked(false); // Un-underline Disruptions
+    setSelectedFilter("healthy first");
   };
 
   return (
@@ -34,7 +27,7 @@ const ServiceDetails: FunctionComponent<ServiceDetailsProps> = ({
       <span
         onClick={handleDisruptionsClick}
         className={`cursor-pointer  ${disruptions > 0 ? "text-red-400 font-bold" : ""} ${
-          isDisruptionsClicked ? "underline" : ""
+          selectedFilter === "unhealthy first" ? "underline" : ""
         }`}
       >
         Disruptions
@@ -46,7 +39,7 @@ const ServiceDetails: FunctionComponent<ServiceDetailsProps> = ({
       <span className="flex items-center">0</span>
       <span
         onClick={handleOperationalClick}
-        className={`cursor-pointer ${isOperationalClicked ? "underline" : ""}`}
+        className={`cursor-pointer ${selectedFilter === "healthy first" ? "underline" : ""}`}
       >
         Fully Operational
       </span>
