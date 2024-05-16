@@ -1,6 +1,5 @@
 import { ServicesContextProvider } from "@/lib/context/services";
 import { createClient } from "@/lib/supabase/server";
-import { API } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import db from "@/lib/db";
 
@@ -23,15 +22,19 @@ export default async function ServicesLayout({
 
   const results = await db.query(
     `
-    SELECT * FROM status_owners
+    SELECT DISTINCT on (name)
+    services.id, name, healthy, time
+    FROM status_owners
     JOIN services on service_id = services.id
+    JOIN status_history on services.id = status_history.service_id
     WHERE user_id = $1
+    ORDER BY name, time DESC
     `,
     [user.id]
   );
 
-  // const response = await fetch(`${API}/api/services`, { cache: "no-cache" });
-  // const body = await response.json();
+  console.log(results.rows);
+
   return (
     <div className="sm:max-h-screen col-start-1 col-span-6 row-span-4 flex flex-col sm:flex-row gap-4 p-6 mx-6">
       <ServicesContextProvider init={results.rows}>
