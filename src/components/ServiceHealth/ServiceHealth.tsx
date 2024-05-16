@@ -35,7 +35,7 @@ const ServiceHealth = (props: Readonly<ServiceHealthProps>) => {
   return (
     <div
       className={`${
-        props.healthy ? "bg-emerald-400" : "bg-red-400"
+        props.healthy ? "bg-teal-50" : "bg-rose-400"
       } flex items-center max-w-md pl-6 pr-12 rounded-sm min-w-96`}
     >
       {props.healthy ? healthyIcon : unhealthyIcon}

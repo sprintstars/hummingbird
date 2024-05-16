@@ -37,18 +37,18 @@ const ServicesContainer = () => {
 
   return (
     <>
-      <div className="col-start-2 col-span-4 md:col-start-1 md:col-span-3 md:mx-12 px-3 border border-slate-500 rounded-lg text-slate-200">
-        <QuickFilterButton
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-          filterValue="healthy first"
-          buttonText="Healthy First"
-        />
+      <div className="col-start-2 col-span-4 md:col-start-1 md:col-span-3 md:mx-12  ">
         <QuickFilterButton
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
           filterValue="unhealthy first"
           buttonText="Unhealthy First"
+        />
+        <QuickFilterButton
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+          filterValue="healthy first"
+          buttonText="Healthy First"
         />
       </div>
 
