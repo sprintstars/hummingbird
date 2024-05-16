@@ -7,8 +7,8 @@ export default function ServicesLayout({
 }>) {
   return (
     <div className="sm:max-h-screen col-start-1 col-span-6 row-span-4 flex flex-col sm:flex-row gap-4 p-6 mx-6">
-      {details}
       {children}
+      {details}
     </div>
   );
 }

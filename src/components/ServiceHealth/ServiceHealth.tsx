@@ -36,7 +36,7 @@ const ServiceHealth = (props: Readonly<ServiceHealthProps>) => {
     <div
       className={`${
         props.healthy ? "bg-emerald-400" : "bg-red-400"
-      } flex items-center max-w-md pl-6 pr-12 rounded-3xl min-w-96`}
+      } flex items-center max-w-md pl-6 pr-12 rounded-lg min-w-96`}
     >
       {props.healthy ? healthyIcon : unhealthyIcon}
       <span className="block flex-1 tracking-widest content-center mx-6 text-center h-full text-2xl">
