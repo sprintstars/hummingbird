@@ -43,7 +43,7 @@ export default function RootLayout({
         </header>
         {children}
         <div className="relative col-start-5 col-span-2 md:col-start-6 md:col-span-1 row-start-6 row-span-2">
-          <Image src="./logo.svg" alt="Hummingbird logo" priority={false} fill={true} />
+          <Image src="/logo.svg" alt="Hummingbird logo" priority={true} fill={true} />
         </div>
       </body>
     </html>

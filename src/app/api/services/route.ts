@@ -4,14 +4,13 @@ import { isServicesArray, makeResponseBody } from "@/lib/utils";
 const headers = { "Content-Type": "application/json" };
 
 const revalidation = process.env.NODE_ENV === "development" ? 0 : 300;
-
 export const revalidate = revalidation;
 
 export const GET = async (req: Request) => {
   try {
     const data = await db.query(`
     SELECT DISTINCT on (name)
-      name, healthy, time
+      services.id, name, healthy, time
     FROM services
     JOIN status_history on services.id = status_history.service_id
     ORDER BY name, time DESC;

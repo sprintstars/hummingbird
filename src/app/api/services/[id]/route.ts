@@ -7,13 +7,17 @@ const headers = { "Content-Type": "application/json" };
 
 export const GET = async (_: Request, { params }: ReqOptions) => {
   try {
-    const data = await db.query(`
-    SELECT name, healthy, time
+    const data = await db.query(
+      `
+    SELECT status_history.id, name, healthy, time
     FROM status_history
     JOIN services on service_id = services.id
-    WHERE service_id = ${params.id}
-    ORDER BY time DESC;
-    `);
+    WHERE service_id = $1
+    ORDER BY time DESC
+    LIMIT 10;
+    `,
+      [params.id]
+    );
 
     if (data.rows.length === 0) {
       return new Response(

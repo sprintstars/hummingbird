@@ -1,5 +1,6 @@
 import SERVICE_SEED_DATA from "./seed/services.js";
 import STATUS_HISTORY_SEED_DATA from "./seed/status_history.js";
+import STATUS_OWNERS_SEED_DATA from "./seed/status_owners.js";
 
 const schema = {
   services: {
@@ -19,6 +20,14 @@ const schema = {
       { name: "time", constraints: "timestamp DEFAULT CURRENT_TIMESTAMP" },
     ],
     seed: STATUS_HISTORY_SEED_DATA,
+  },
+  status_owners: {
+    columns: [
+      { name: "id", constraints: "serial PRIMARY KEY" },
+      { name: "service_id", constraints: "integer REFERENCES services(id)" },
+      { name: "user_id", constraints: "uuid REFERENCES auth.users(id)" },
+    ],
+    seed: STATUS_OWNERS_SEED_DATA,
   },
 };
 
