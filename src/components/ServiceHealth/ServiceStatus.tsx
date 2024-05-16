@@ -6,6 +6,7 @@ type ServiceProps = {
   name: string;
   healthy: boolean;
   pinned: boolean;
+  count: number;
 };
 
 const healthyIcon = (
@@ -34,7 +35,7 @@ const unhealthyIcon = (
   </svg>
 );
 
-const Service: FunctionComponent<ServiceProps> = ({ id, name, healthy, pinned }) => {
+const Service: FunctionComponent<ServiceProps> = ({ id, name, healthy, pinned, count }) => {
   const bg = healthy ? "bg-teal-50" : "bg-rose-400";
   return (
     <Link
@@ -43,10 +44,10 @@ const Service: FunctionComponent<ServiceProps> = ({ id, name, healthy, pinned })
         pinned ? "border-black" : "border-transparent"
       } p-2 text-center ${bg}`}
     >
-      <div className="flex items-center">
+      <div className={`flex ${count < 5 && "flex-col-reverse gap-4"} items-center`}>
         {/* {pinned && <div className={`absolute top-0 -left-2 w-2 h-full ${bg}`}></div>} */}
         {healthy ? healthyIcon : unhealthyIcon}
-        <span className="flex-1 pr-4">{name}</span>
+        <span className={`flex-1 ${count < 5 ? "pr-0" : "pr-4"}`}>{name}</span>
       </div>
     </Link>
   );

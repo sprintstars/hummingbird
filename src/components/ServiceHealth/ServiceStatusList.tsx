@@ -46,15 +46,18 @@ export const ServiceList: FunctionComponent<ServiceListProps> = ({ active = -1 }
   }
 
   return (
-    <div className="sm:overflow-y-auto rounded-md flex items-center flex-col gap-4 px-2 text-slate-700 h-full">
+    <div className="sm:overflow-y-auto sm:text-xl rounded-md flex items-center flex-col gap-4 px-2 text-slate-700 h-full">
       {sorted.map((service) => (
-        <Service
-          id={service.id}
-          key={`${service.name}-${service.healthy}`}
-          name={service.name}
-          healthy={service.healthy}
-          pinned={service.id === active}
-        />
+        <>
+          <Service
+            id={service.id}
+            key={`${service.name}-${service.healthy}`}
+            name={service.name}
+            healthy={service.healthy}
+            pinned={service.id === active}
+            count={sorted.length}
+          />
+        </>
       ))}
     </div>
   );
