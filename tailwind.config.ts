@@ -23,6 +23,7 @@ const config = {
       backgroundImage: {
         "footer-green": "linear-gradient(354deg, rgb(221, 221, 221) 20vh, rgb(19, 74, 86) 20.3vh)",
         "footer-blue": "linear-gradient(354deg, rgb(221, 221, 221) 20vh, rgb(9, 9, 121) 20.3vh)",
+        "login-image": "url('/images/loginbackground.jpg')",
       },
       colors: {
         "app-background": "#0c1567",
