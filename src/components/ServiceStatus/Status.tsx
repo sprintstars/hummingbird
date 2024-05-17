@@ -5,7 +5,6 @@ type ServiceProps = {
   id: number;
   name: string;
   healthy: boolean;
-  pinned: boolean;
   count: number;
 };
 
@@ -35,22 +34,20 @@ const unhealthyIcon = (
   </svg>
 );
 
-const Service: FunctionComponent<ServiceProps> = ({ id, name, healthy, pinned, count }) => {
-  const bg = healthy ? "bg-teal-50" : "bg-rose-400";
+const Status: FunctionComponent<ServiceProps> = ({ id, name, healthy, count }) => {
+  const bg = healthy ? "bg-service-up" : "bg-service-down";
+  const fg = healthy ? "text-service-up" : "text-service-down";
   return (
     <Link
       href={`/status/${id}`}
-      className={`relative w-full border-4 border-transparent flex-auto content-center rounded-md ${
-        pinned ? "border-black" : "border-transparent"
-      } p-2 text-center ${bg}`}
+      className={`relative w-full border-4 border-transparent flex-auto content-center rounded-md p-2 text-center ${bg}`}
     >
       <div className={`flex ${count < 5 && "flex-col-reverse gap-4"} items-center`}>
-        {/* {pinned && <div className={`absolute top-0 -left-2 w-2 h-full ${bg}`}></div>} */}
         {healthy ? healthyIcon : unhealthyIcon}
-        <span className={`flex-1 ${count < 5 ? "pr-0" : "pr-4"}`}>{name}</span>
+        <span className={`flex-1 ${count < 5 ? "pr-0" : "pr-4"} ${fg}`}>{name}</span>
       </div>
     </Link>
   );
 };
 
-export default Service;
+export default Status;

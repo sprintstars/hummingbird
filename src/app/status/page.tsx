@@ -1,4 +1,4 @@
-import { ServiceList } from "@/components/ServiceHealth/ServiceStatusList";
+import { StatusList } from "@/components/ServiceStatus/StatusList";
 
 export default function ServicesChildren() {
   return (
@@ -21,7 +21,7 @@ export default function ServicesChildren() {
           <input type="checkbox" />
         </label>
       </header>
-      <ServiceList active={-1} />
+      <StatusList active={-1} />
     </>
   );
 }
