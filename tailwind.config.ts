@@ -1,13 +1,8 @@
 import type { Config } from "tailwindcss";
 
 const config = {
-  darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+  darkMode: ["selector"],
+  content: ["./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
@@ -22,17 +17,20 @@ const config = {
         museoModerno: "var(--font-museo-moderno)",
         palanquin: "var(--font-palanquin)",
       },
-
       boxShadow: {
         ib: "inset 0 -1em 0.3em -0.5em rgb(0 0 0 / 30%)",
       },
       backgroundImage: {
-        footer: "linear-gradient(354deg, rgb(221, 221, 221) 20vh, rgb(9, 9, 121) 20.3vh)",
+        "footer-green": "linear-gradient(354deg, rgb(221, 221, 221) 20vh, rgb(19, 74, 86) 20.3vh)",
+        "footer-blue": "linear-gradient(354deg, rgb(221, 221, 221) 20vh, rgb(9, 9, 121) 20.3vh)",
+        "login-image": "url('/images/loginbackground.jpg')",
       },
       colors: {
         "app-background": "#0c1567",
-        "service-healthy": "#B6EB9D",
-        "service-unhealthy": "#FECDCD",
+        service: {
+          healthy: "#B6EB9D",
+          unhealthy: "#FECDCD",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

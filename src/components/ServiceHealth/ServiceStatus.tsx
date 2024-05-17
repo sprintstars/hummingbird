@@ -1,13 +1,19 @@
-type ServiceHealthProps = {
+import Link from "next/link";
+import { FunctionComponent } from "react";
+
+type ServiceProps = {
+  id: number;
   name: string;
-  timestamp: Date;
   healthy: boolean;
+  pinned: boolean;
+  count: number;
 };
 
 const healthyIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" className="size-10 my-1">
     <path
       fillRule="evenodd"
+      fill="rgb(51,204,165)"
       d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
       clipRule="evenodd"
     />
@@ -18,9 +24,7 @@ const unhealthyIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    fill="red"
-    stroke="#444"
-    strokeWidth="0.7"
+    fill="#fefefe"
     className="size-10 my-1"
   >
     <path
@@ -31,19 +35,22 @@ const unhealthyIcon = (
   </svg>
 );
 
-const ServiceHealth = (props: Readonly<ServiceHealthProps>) => {
+const Service: FunctionComponent<ServiceProps> = ({ id, name, healthy, pinned, count }) => {
+  const bg = healthy ? "bg-teal-50" : "bg-rose-400";
   return (
-    <div
-      className={`${
-        props.healthy ? "bg-emerald-400" : "bg-red-400"
-      } flex items-center max-w-md pl-6 pr-12 rounded-lg min-w-96`}
+    <Link
+      href={`/status/${id}`}
+      className={`relative w-full border-4 border-transparent flex-auto content-center rounded-md ${
+        pinned ? "border-black" : "border-transparent"
+      } p-2 text-center ${bg}`}
     >
-      {props.healthy ? healthyIcon : unhealthyIcon}
-      <span className="block flex-1 tracking-widest content-center mx-6 text-center h-full text-2xl">
-        {props.name}
-      </span>
-    </div>
+      <div className={`flex ${count < 5 && "flex-col-reverse gap-4"} items-center`}>
+        {/* {pinned && <div className={`absolute top-0 -left-2 w-2 h-full ${bg}`}></div>} */}
+        {healthy ? healthyIcon : unhealthyIcon}
+        <span className={`flex-1 ${count < 5 ? "pr-0" : "pr-4"}`}>{name}</span>
+      </div>
+    </Link>
   );
 };
 
-export default ServiceHealth;
+export default Service;

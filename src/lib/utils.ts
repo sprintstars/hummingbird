@@ -6,8 +6,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// Data
+export const API = `${process.env.NEXT_PUBLIC_HOSTNAME}/api`;
+
 // Domain models
 export type Service = {
+  id: number;
   name: string;
   time: Date;
   healthy: boolean;
@@ -26,7 +30,10 @@ export type ServiceEndpoint = {
 export type Validator<T> = (obj: any) => obj is T;
 
 export const isService: Validator<Service> = (o: any): o is Service =>
-  typeof o.name === "string" && o.time instanceof Date && typeof o.healthy === "boolean";
+  typeof o.id === "number" &&
+  typeof o.name === "string" &&
+  o.time instanceof Date &&
+  typeof o.healthy === "boolean";
 
 export const isServicesArray: Validator<Service[]> = (o: any): o is Service[] => {
   if (Array.isArray(o)) {
@@ -60,7 +67,6 @@ export const makeResponseBody = (status: "ok" | "error" | "not found", payload?:
 export const tryParseJson = <T>(jsonStr: string, validator: Validator<T>): T | null => {
   try {
     const parsed = JSON.parse(jsonStr);
-    // console.log(parsed);
     if (validator(parsed)) {
       return parsed;
     }
