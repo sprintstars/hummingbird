@@ -14,6 +14,7 @@
     --up-background: 165, 55%, 97%;
     --up-foreground: 165, 60%, 15%;
 
+    /* Base border radius */
     --radius: 0.5rem;
 
     --login-img: "/images/loginbackground.jpg";

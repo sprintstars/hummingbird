@@ -7,4 +7,7 @@
 import Status from "./Status";
 import StatusList from "./StatusList";
 
+import type { Order, Filter } from "./StatusList";
+
 export { Status, StatusList };
+export type { Order, Filter };

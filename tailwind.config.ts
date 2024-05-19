@@ -20,16 +20,12 @@ const config = {
         layout: "linear-gradient(354deg, rgb(221, 221, 221) 20vh, rgb(19, 74, 86) 20.3vh)",
         login: "url(var(--login-img))",
       },
-      textColor: {
-        service: {
-          up: "hsl(var(--up-foreground))",
-          down: "hsl(var(--down-foreground))",
-        },
-      },
       colors: {
         service: {
           up: "hsl(var(--up-background))",
+          "up-fg": "hsl(var(--up-foreground))",
           down: "hsl(var(--down-background))",
+          "down-fg": "hsl(var(--down-foreground))",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

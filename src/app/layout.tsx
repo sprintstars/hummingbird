@@ -1,13 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, MuseoModerno, Palanquin } from "next/font/google";
-import { redirect } from "next/navigation";
-import Image from "next/image";
-
-import { ServicesContextProvider } from "@/lib/context/services";
-import { createClient } from "@/lib/supabase/server";
-import db from "@/lib/db";
 import { AuthButton } from "@/components/Auth";
+import Image from "next/image";
+import { revalidatePath } from "next/cache";
 
 // Hostname
 const defaultUrl = process.env.VERCEL_URL
@@ -38,31 +34,7 @@ type RootLayoutProps = Readonly<{
 }>;
 
 export default async function RootLayout({ children, details }: RootLayoutProps) {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
-  const results = await db.query(
-    `
-    SELECT DISTINCT on (name)
-    services.id, name, healthy, time
-    FROM status_owners
-    JOIN services on service_id = services.id
-    JOIN status_history on services.id = status_history.service_id
-    WHERE user_id = $1
-    ORDER BY name, time DESC
-    `,
-    [user.id]
-  );
-  // ${inter.className}
-  // ${palanquin.className}
-
+  revalidatePath("/");
   return (
     <html lang="en">
       <body
@@ -78,16 +50,21 @@ export default async function RootLayout({ children, details }: RootLayoutProps)
         <header className="col-start-1 col-span-6 px-4 py-2 text-slate-50">
           <AuthButton />
         </header>
-        <main className="sm:max-h-screen col-start-1 col-span-6 row-span-4 flex flex-col sm:flex-row gap-4 p-6 mx-6">
-          <ServicesContextProvider init={results.rows}>
-            <section className="flex flex-col flex-[2] rounded-md text-slate-900">
-              {details}
-            </section>
-            <section className="flex-1 flex flex-col rounded-md gap-4 px-2">{children}</section>
-          </ServicesContextProvider>
-        </main>
-        <div className="relative col-start-5 col-span-2 md:col-start-6 md:col-span-1 row-start-6 row-span-2">
-          <Image src="/logo.svg" alt="Hummingbird logo" priority={true} fill={true} />
+        {children}
+        <div
+          className={`
+        relative
+        col-start-4 col-span-3 row-start-6 row-span-2
+        `}
+        >
+          <Image
+            src="/logo.svg"
+            alt="Hummingbird logo"
+            priority={true}
+            fill={true}
+            objectFit="contain"
+            objectPosition="right"
+          />
         </div>
       </body>
     </html>

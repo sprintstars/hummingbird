@@ -1,19 +1,13 @@
 import Link from "next/link";
-import StatusDetails from "@/components/ServiceStatus/ServiceStatusDetails";
+import { StatusDetails } from "@/components/ServiceDetails";
 import { API } from "@/lib/utils";
 
-const wait = (ms: number) =>
-  new Promise((res, _) => {
-    setTimeout(res, ms);
-  });
-
-export default async function StatusDetailsView({ params }: { params: { id: string } }) {
-  await wait(1000);
+const StatusDetailsView = async ({ params }: { params: { id: string } }) => {
   const response = await fetch(`${API}/services/${params.id}`, { cache: "no-cache" });
   const body = await response.json();
   return (
     <>
-      <Link href="/status" className="text-right px-4 text-slate-200">
+      <Link href="/status" className="h-10 p-2 pl-8 mb-4 text-slate-200">
         Back
       </Link>
       <StatusDetails
@@ -23,4 +17,6 @@ export default async function StatusDetailsView({ params }: { params: { id: stri
       />
     </>
   );
-}
+};
+
+export default StatusDetailsView;

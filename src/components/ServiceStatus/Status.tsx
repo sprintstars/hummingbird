@@ -36,7 +36,7 @@ const unhealthyIcon = (
 
 const Status: FunctionComponent<ServiceProps> = ({ id, name, healthy, count }) => {
   const bg = healthy ? "bg-service-up" : "bg-service-down";
-  const fg = healthy ? "text-service-up" : "text-service-down";
+  const fg = healthy ? "text-service-up-fg" : "text-service-down-fg";
   return (
     <Link
       href={`/status/${id}`}
