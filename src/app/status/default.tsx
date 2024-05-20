@@ -21,7 +21,12 @@ export default function ServicesChildren() {
       <div className="flex items-center gap-2 h-10 p-2">
         <label className="flex-auto">
           Order
-          <Select value={order}>
+          <Select
+            value={order}
+            onValueChange={(value) => {
+              setOrder(value as Order);
+            }}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Order" />
             </SelectTrigger>
@@ -49,7 +54,12 @@ export default function ServicesChildren() {
         </label>
         <label className="flex-auto">
           Filter
-          <Select value={filter}>
+          <Select
+            value={filter}
+            onValueChange={(value) => {
+              setFilter(value as Filter);
+            }}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Filter" />
             </SelectTrigger>
