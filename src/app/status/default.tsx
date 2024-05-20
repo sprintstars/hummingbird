@@ -15,7 +15,7 @@ import type { Order, Filter } from "@/components/ServiceStatus";
 
 export default function ServicesChildren() {
   const [order, setOrder] = useState<Order>("down");
-  const [filter, setFilter] = useState<Filter>("down");
+  const [filter, setFilter] = useState<Filter>("unfiltered");
   return (
     <>
       <div className="flex items-center gap-2 h-10 p-2">
