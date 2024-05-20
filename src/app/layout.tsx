@@ -30,10 +30,9 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-  details: React.ReactNode;
 }>;
 
-export default async function RootLayout({ children, details }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
   revalidatePath("/");
   return (
     <html lang="en">
