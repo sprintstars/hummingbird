@@ -61,8 +61,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             alt="Hummingbird logo"
             priority={true}
             fill={true}
-            objectFit="contain"
-            objectPosition="right"
+            className="object-contain object-right"
           />
         </div>
       </body>
