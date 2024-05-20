@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/Primitives/Select";
+import { Input } from "@/components/Primitives/Input";
 
 // types
 import type { Order, Filter } from "@/components/ServiceStatus";
@@ -16,6 +17,7 @@ import type { Order, Filter } from "@/components/ServiceStatus";
 export default function ServicesChildren() {
   const [order, setOrder] = useState<Order>("down");
   const [filter, setFilter] = useState<Filter>("unfiltered");
+  const [nameFilter, setNameFilter] = useState<string>("");
   return (
     <>
       <div className="flex items-center gap-2 h-10 p-2">
@@ -85,8 +87,18 @@ export default function ServicesChildren() {
             </SelectContent>
           </Select>
         </label>
+
+        <label className="flex-auto">
+          &nbsp;
+          <Input
+            type="search"
+            placeholder="filter by name"
+            className="text-black  self-start"
+            onChange={(e) => setNameFilter(e.target.value)}
+          />
+        </label>
       </div>
-      <StatusList order={order} filter={filter} />
+      <StatusList order={order} filter={filter} nameFilter={nameFilter} />
     </>
   );
 }
