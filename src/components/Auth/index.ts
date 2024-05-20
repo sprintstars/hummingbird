@@ -1,3 +1,4 @@
 import AuthButton from "./AuthButton";
+import SubmitButton from "./SubmitButton";
 
-export { AuthButton };
+export { AuthButton, SubmitButton };

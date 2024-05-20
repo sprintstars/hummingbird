@@ -11,7 +11,7 @@ interface StatusDetailsProps {
 
 const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, name, history }) => {
   return (
-    <div className="w-full flex-1 rounded-md p-4 bg-slate-100">
+    <div className="flex-1 rounded-md p-4 bg-foreground">
       <div>id: {id}</div>
       <div>name: {name}</div>
       <div>{JSON.stringify(history)}</div>

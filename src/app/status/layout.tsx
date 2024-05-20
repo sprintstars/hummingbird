@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import db from "@/lib/db";
 
-export default async function ServicesLayout({
+export default async function StatusLayout({
   children,
   details,
 }: Readonly<{
@@ -17,7 +17,7 @@ export default async function ServicesLayout({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect("/login");
+    return redirect("/");
   }
 
   const results = await db.query(
@@ -34,11 +34,13 @@ export default async function ServicesLayout({
   );
 
   return (
-    <div className="sm:max-h-screen col-start-1 col-span-6 row-span-4 flex flex-col sm:flex-row gap-4 p-6 mx-6">
-      <ServicesContextProvider init={results.rows}>
-        <main className="flex flex-col flex-[2] rounded-md text-slate-900">{details}</main>
-        <aside className="flex-1 flex flex-col rounded-md gap-4 px-2">{children}</aside>
-      </ServicesContextProvider>
-    </div>
+    <>
+      <main className="sm:max-h-screen col-start-1 col-span-6 row-span-4 flex flex-col sm:flex-row gap-4 p-6 mx-6">
+        <ServicesContextProvider init={results.rows}>
+          <section className="flex flex-col flex-[2] rounded-md text-slate-900">{details}</section>
+          <section className="flex-1 flex flex-col rounded-md gap-4 px-2">{children}</section>
+        </ServicesContextProvider>
+      </main>
+    </>
   );
 }
