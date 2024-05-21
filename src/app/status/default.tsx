@@ -20,8 +20,8 @@ export default function ServicesChildren() {
   const [nameFilter, setNameFilter] = useState<string>("");
   return (
     <>
-      <div className="flex items-center gap-2 h-10 p-2">
-        <label className="flex-auto">
+      <div className="flex items-center flex-wrap gap-4 p-2">
+        <label className="w-[46%] flex-auto">
           Order
           <Select
             value={order}
@@ -54,7 +54,7 @@ export default function ServicesChildren() {
             </SelectContent>
           </Select>
         </label>
-        <label className="flex-auto">
+        <label className="w-[46%] flex-auto">
           Filter
           <Select
             value={filter}
@@ -87,16 +87,12 @@ export default function ServicesChildren() {
             </SelectContent>
           </Select>
         </label>
-
-        <label className="flex-auto">
-          &nbsp;
-          <Input
-            type="search"
-            placeholder="filter by name"
-            className="text-black  self-start"
-            onChange={(e) => setNameFilter(e.target.value)}
-          />
-        </label>
+        <Input
+          type="search"
+          placeholder="filter by name"
+          className="flex-auto text-foreground"
+          onChange={(e) => setNameFilter(e.target.value)}
+        />
       </div>
       <StatusList order={order} filter={filter} nameFilter={nameFilter} />
     </>
