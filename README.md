@@ -19,16 +19,16 @@ Hummingbird gives you the visibility you need to keep your business running smoo
 ## 📸 Screenshots
 
 **Status List Preview:** This is a sneak peek at the status list feature within our project.
-[![Status List](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/statusList.png)](Status List Preview)
+![Status List](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/statusList.png)
 
 **Filter by name Preview:** Start typing in the input box to filter by service name.
-[![Filter by name](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/filterByName.png)](Filter by name Preview)
+![Filter by name](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/filterByName.png)
 
 **Healthy/Unhealthy Services Preview:**
 
-[![Healthy](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/healthy.png)](Healthy Service Preview)
+![Healthy](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/healthy.png)
 
-[![Unhealthy](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/unhealthy.png)](Unhealthy Service Preview)
+![Unhealthy](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/unhealthy.png)
 
 ## 🚀 Key Features
 
