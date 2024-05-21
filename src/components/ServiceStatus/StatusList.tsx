@@ -14,9 +14,10 @@ export type Filter = "up" | "down" | "unfiltered";
 type StatusListProps = {
   order: Order;
   filter: Filter;
+  nameFilter: string;
 };
 
-const StatusList: FunctionComponent<StatusListProps> = ({ order, filter }) => {
+const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFilter }) => {
   const { services } = useServicesContext();
 
   const sorter = useCallback(
@@ -46,8 +47,14 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter }) => {
     [filter]
   );
 
+  const nameFilterer = useCallback(
+    (s: Service) => s.name.toLowerCase().includes(nameFilter.toLowerCase()),
+    [nameFilter]
+  );
+
   const sorted = order === "unordered" ? services : [...services].sort(sorter);
   const filtered = filter === "unfiltered" ? sorted : sorted.filter(filterer);
+  const nameFiltered = nameFilter === "" ? filtered : filtered.filter(nameFilterer);
 
   return (
     <div
@@ -57,7 +64,7 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter }) => {
         sm:overflow-y-auto sm:text-xl
       `}
     >
-      {filtered.map((service) => (
+      {nameFiltered.map((service) => (
         <Status
           id={service.id}
           key={`${service.name}-${service.healthy}`}
