@@ -13,6 +13,7 @@
     --down-foreground: 165, 5%, 100%;
     --up-background: 165, 55%, 97%;
     --up-foreground: 165, 60%, 15%;
+    --background-darker: 191, 45%, 41%;
 
     /* Base border radius */
     --radius: 0.5rem;
