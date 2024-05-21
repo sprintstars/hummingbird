@@ -2,6 +2,8 @@ Markdown
 
 # Hummingbird - Hosted Status Page [![Project Status: WIP](https://img.shields.io/badge/Project%20Status-WIP-yellow.svg)](https://shields.io/) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+[![image test](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/work-in-progress.png)]
+
 Hummingbird is your early warning system for third-party service outages. We monitor your critical dependencies like website hosting, payment processors, and more, so you can address issues before they impact your customers.
 
 ## Why Hummingbird?
