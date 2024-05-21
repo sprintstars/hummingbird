@@ -18,25 +18,31 @@ Hummingbird gives you the visibility you need to keep your business running smoo
 
 ## 📸 Screenshots
 
-[![Operational Status](./docs/images/operational_status.png)](./docs/images/operational_status.png)
-[![Degraded Performance](./docs/images/degraded_performance.png)](./docs/images/degraded_performance.png)
-[![Outage](./docs/images/outage.png)](./docs/images/outage.png)
+**Status List Preview:** This is a sneak peek at the status list feature within our project.
+[![Status List](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/statusList.png)](Status List Preview)
 
-_Replace the placeholders with actual screenshots showcasing different status scenarios._
+**Filter by name Preview:** Start typing in the input box to filter by service name.
+[![Filter by name](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/filterByName.png)](Filter by name Preview)
+
+**Healthy/Unhealthy Services Preview:**
+
+[![Healthy](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/healthy.png)](Healthy Service Preview)
+
+[![Unhealthy](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/unhealthy.png)](Unhealthy Service Preview)
 
 ## 🚀 Key Features
 
 - **Real-time Monitoring:** Get immediate updates on the status of your critical services.
-- **Proactive Alerts:** Receive notifications via email, Slack, or SMS before your customers notice problems.
+
 - **Clear Dashboard:** Easily visualise the health of all your dependencies.
 - **Historical Metrics:** Track outage history and identify patterns.
 
 ## 🛠️ How It Works
 
 1. **Simple Setup:** Easily add the services you rely on to Hummingbird.
-2. **Customisable Alerts:** Choose how and when you want to be notified.
-3. **Intuitive Dashboard:** Quickly assess the status of your entire system.
-4. **Actionable Insights:** Use historical data to make informed decisions.
+
+2. **Intuitive Dashboard:** Quickly assess the status of your entire system.
+3. **Actionable Insights:** Use historical data to make informed decisions.
 
 ## 📝 Documentation
 
@@ -80,8 +86,12 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) fi
 
 _Who you finna shout out 4 this?_
 
+[School of Code link]
+
 ## 🧭 Roadmap
 
-_Feature 1_
-_Feature 2_
+- **Proactive Alerts:** Receive notifications via email, Slack, or SMS before your customers notice problems.
+
+- **Customisable Alerts:** Choose how and when you want to be notified.
+
 _..._
