@@ -7,7 +7,7 @@ import { ScrollArea } from "@/components/Primitives/Scrollbar";
 
 // types
 import type { FunctionComponent } from "react";
-import type { Service } from "@/lib/utils";
+import type { ServiceHistory } from "@/lib/utils";
 
 export type Order = "up" | "down" | "unordered";
 export type Filter = "up" | "down" | "unfiltered";
@@ -22,18 +22,18 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
   const { services } = useServicesContext();
 
   const sorter = useCallback(
-    (a: Service, b: Service) => {
-      if (a.healthy === b.healthy) {
+    (a: ServiceHistory, b: ServiceHistory) => {
+      if (a.history_health[0] === b.history_health[0]) {
         return 0;
       }
       if (order === "down") {
-        if (a.healthy && !b.healthy) {
+        if (a.history_health[0] && !b.history_health[0]) {
           return 1;
         } else {
           return -1;
         }
       } else {
-        if (a.healthy && !b.healthy) {
+        if (a.history_health[0] && !b.history_health[0]) {
           return -1;
         } else {
           return 1;
@@ -44,12 +44,12 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
   );
 
   const filterer = useCallback(
-    (s: Service) => (filter === "down" ? !s.healthy : s.healthy),
+    (s: ServiceHistory) => (filter === "down" ? !s.history_health[0] : s.history_health[0]),
     [filter]
   );
 
   const nameFilterer = useCallback(
-    (s: Service) => s.name.toLowerCase().includes(nameFilter.toLowerCase()),
+    (s: ServiceHistory) => s.name.toLowerCase().includes(nameFilter.toLowerCase()),
     [nameFilter]
   );
 
@@ -69,9 +69,9 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
         {nameFiltered.map((service) => (
           <Status
             id={service.id}
-            key={`${service.name}-${service.healthy}`}
+            key={`${service.name}-${service.history_health[0]}`}
             name={service.name}
-            healthy={service.healthy}
+            healthy={service.history_health[0]}
             count={sorted.length}
           />
         ))}

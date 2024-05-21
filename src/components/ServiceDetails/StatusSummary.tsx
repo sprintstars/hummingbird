@@ -4,8 +4,24 @@ import { useServicesContext } from "@/lib/context/services";
 
 const StatusSummary = () => {
   const { services } = useServicesContext();
-  const disruptions = services.reduce((sum, service) => (service.healthy ? sum : sum + 1), 0);
-  const operational = services.reduce((sum, service) => (service.healthy ? sum + 1 : sum), 0);
+  const disruptions = services.reduce(
+    (sum, service) => (service.history_health[0] ? sum : sum + 1),
+    0
+  );
+  const operational = services.reduce(
+    (sum, service) => (service.history_health[0] ? sum + 1 : sum),
+    0
+  );
+  const resolved = services.reduce((sum, service) => {
+    const currentHealth = service.history_health[0];
+    if (currentHealth === false) return sum;
+    for (const health of service.history_health) {
+      if (health === false) {
+        return sum + 1;
+      }
+    }
+    return sum;
+  }, 0);
   const isDisruptionsClicked = true;
   const isOperationalClicked = false;
   return (
@@ -21,7 +37,7 @@ const StatusSummary = () => {
         `}
       >
         <span
-          className={`cursor-pointer  ${disruptions > 0 ? "text-service-down font-bold" : ""} ${
+          className={`${disruptions > 0 ? "text-service-down font-bold" : ""} ${
             isDisruptionsClicked ? "underline" : ""
           }`}
         >
@@ -29,16 +45,16 @@ const StatusSummary = () => {
         </span>
         <span
           className={`flex items-center ${
-            disruptions > 0 ? "text-service-down font-bold text-5xl" : ""
+            disruptions > 0
+              ? "text-service-down font-bold text-5xl lg:text-[3.5vw]"
+              : "lg:text-[3vw]"
           }`}
         >
           {disruptions}
         </span>
         <span>Resolved</span>
-        <span className="flex items-center">0</span>
-        <span className={`cursor-pointer ${isOperationalClicked ? "underline" : ""}`}>
-          Operational
-        </span>
+        <span className="flex items-center">{resolved}</span>
+        <span className={`${isOperationalClicked ? "underline" : ""}`}>Operational</span>
         <span className="flex items-center">{operational}</span>
       </div>
     </>
