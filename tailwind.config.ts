@@ -28,6 +28,7 @@ const config = {
           "down-fg": "hsl(var(--down-foreground))",
         },
         background: "hsl(var(--background))",
+        "background-darker": "hsl(var(--background-darker))",
         foreground: "hsl(var(--foreground))",
       },
       borderRadius: {

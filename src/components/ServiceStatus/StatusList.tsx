@@ -3,6 +3,7 @@
 import { useCallback } from "react";
 import { useServicesContext } from "@/lib/context/services";
 import Status from "./Status";
+import { ScrollArea } from "@/components/Primitives/Scrollbar";
 
 // types
 import type { FunctionComponent } from "react";
@@ -57,23 +58,25 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
   const nameFiltered = nameFilter === "" ? filtered : filtered.filter(nameFilterer);
 
   return (
-    <div
-      className={`flex items-center flex-col gap-4
+    <ScrollArea>
+      <div
+        className={`flex items-center flex-col gap-4
       h-full rounded-md px-2
       text-slate-700
-        sm:overflow-y-auto sm:text-xl
+        sm:text-xl
       `}
-    >
-      {nameFiltered.map((service) => (
-        <Status
-          id={service.id}
-          key={`${service.name}-${service.healthy}`}
-          name={service.name}
-          healthy={service.healthy}
-          count={sorted.length}
-        />
-      ))}
-    </div>
+      >
+        {nameFiltered.map((service) => (
+          <Status
+            id={service.id}
+            key={`${service.name}-${service.healthy}`}
+            name={service.name}
+            healthy={service.healthy}
+            count={sorted.length}
+          />
+        ))}
+      </div>
+    </ScrollArea>
   );
 };
 
