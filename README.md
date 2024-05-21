@@ -59,7 +59,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) fi
 
 ## 💖 Acknowledgements
 
-_Who you finna shout out for this?_
+_Who you finna shout out 4 this?_
 
 ## 🧭 Roadmap
 
