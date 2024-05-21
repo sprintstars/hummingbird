@@ -3,7 +3,7 @@
 import { useCallback } from "react";
 import { useServicesContext } from "@/lib/context/services";
 import Status from "./Status";
-import { ScrollArea, ScrollBar } from "@/components/Primitives/Scrollbar";
+import { ScrollArea } from "@/components/Primitives/Scrollbar";
 
 // types
 import type { FunctionComponent } from "react";
