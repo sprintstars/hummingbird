@@ -2,7 +2,7 @@ Markdown
 
 # Hummingbird - Hosted Status Page [![Project Status: WIP](https://img.shields.io/badge/Project%20Status-WIP-yellow.svg)](https://shields.io/) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-[![image test](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/work-in-progress.png)]
+![WIP](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/work-in-progress.png)
 
 Hummingbird is your early warning system for third-party service outages. We monitor your critical dependencies like website hosting, payment processors, and more, so you can address issues before they impact your customers.
 
@@ -54,10 +54,27 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) fi
 - Abida (https://github.com/Abida64)
 - Catherine (https://github.com/csarq)
 
-## ⚙️ Tech Stack
+## ⚙️ Technologies Used
 
 ![GitHub language count](https://img.shields.io/github/languages/count/sprintstars/hummingbird?style=for-the-badge&color=yellow)
+
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 ## 💖 Acknowledgements
 
