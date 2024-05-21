@@ -22,14 +22,37 @@ export default async function StatusLayout({
 
   const results = await db.query(
     `
-    SELECT DISTINCT on (name)
-    services.id, name, healthy, time
-    FROM status_owners
-    JOIN services on service_id = services.id
-    JOIN status_history on services.id = status_history.service_id
-    WHERE user_id = $1
-    ORDER BY name, time DESC
-    `,
+SELECT
+  s.id,
+  s.name,
+  (
+    SELECT ARRAY (
+      SELECT sh.time
+      FROM
+        status_history sh
+      WHERE
+        sh.service_id = s.id
+      ORDER BY sh.time DESC
+      LIMIT 24
+    ) as time
+  ) AS history_times,
+  (
+    SELECT ARRAY (
+      SELECT sh.healthy
+      FROM
+        status_history sh
+      WHERE
+        sh.service_id = s.id
+      ORDER BY sh.time DESC
+      LIMIT 24
+    ) as time
+  ) AS history_health
+FROM
+  services s
+  JOIN status_owners so ON s.id = so.service_id
+WHERE
+  so.user_id = $1
+  `,
     [user.id]
   );
 

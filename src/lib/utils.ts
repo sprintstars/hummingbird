@@ -17,6 +17,13 @@ export type Service = {
   healthy: boolean;
 };
 
+export type ServiceHistory = {
+  id: number;
+  name: string;
+  history_times: Date[];
+  history_health: boolean[];
+};
+
 export type UpdateStrategy = "ping" | "rss" | "json";
 
 export type ServiceEndpoint = {
@@ -38,6 +45,29 @@ export const isService: Validator<Service> = (o: any): o is Service =>
 export const isServicesArray: Validator<Service[]> = (o: any): o is Service[] => {
   if (Array.isArray(o)) {
     return o.map(isService).every(Boolean);
+  }
+  return false;
+};
+
+export const isDate: Validator<Date> = (o: any): o is Date => o instanceof Date;
+export const isDateArray: Validator<Date[]> = (o: any): o is Date[] =>
+  Array.isArray(o) ? o.map(isDate).every(Boolean) : false;
+
+export const isBoolean: Validator<boolean> = (o: any): o is boolean => typeof o === "boolean";
+export const isBooleanArray: Validator<Boolean[]> = (o: any): o is boolean[] =>
+  Array.isArray(o) ? o.map(isBoolean).every(Boolean) : false;
+
+export const isServiceHistory: Validator<ServiceHistory> = (o: any): o is ServiceHistory =>
+  typeof o.id === "number" &&
+  typeof o.name === "string" &&
+  isDateArray(o.history_times) &&
+  isBooleanArray(o.history_health);
+
+export const isServiceHistoryArray: Validator<ServiceHistory[]> = (
+  o: any
+): o is ServiceHistory[] => {
+  if (Array.isArray(o)) {
+    return o.map(isServiceHistory).every(Boolean);
   }
   return false;
 };
