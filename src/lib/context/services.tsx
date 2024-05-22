@@ -2,6 +2,8 @@
 
 import { type FunctionComponent, createContext, useContext, useState, useEffect } from "react";
 import type { ServiceHistory } from "../utils";
+import { createClient } from "../supabase/client";
+import { redirect } from "next/navigation";
 
 const servicesEndpoint = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/services`;
 
@@ -18,16 +20,22 @@ const ServicesContextProvider: FunctionComponent<ServicesContextProviderProps> =
 }) => {
   const [services, setServices] = useState<ServiceHistory[]>(init);
   useEffect(() => {
-    const fetchServices = () => {
-      // const response = await fetch(servicesEndpoint);
-      // const body = await response.json();
-      // setServices(body.payload);
-      // setServices(
-      //   services.map((service) => ({ ...service, healthy: Math.random() > 0.5 ? true : false }))
-      // );
-      return services;
+    const fetchServices = async () => {
+      const supabase = createClient();
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        return redirect("/");
+      }
+
+      const response = await fetch(`${servicesEndpoint}?id=${user.id}`);
+      const body = await response.json();
+      setServices(body.payload);
     };
-    const intervalID = setTimeout(fetchServices, 100_000);
+    const intervalID = setTimeout(fetchServices, 300_000);
     return () => clearTimeout(intervalID);
   }, [services]);
   return <ServicesContext.Provider value={{ services }}>{children}</ServicesContext.Provider>;
