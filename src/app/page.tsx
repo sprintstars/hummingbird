@@ -2,7 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import { SubmitButton } from "@/components/Auth";
+import { SubmitButton } from "@/components/Primitives";
 
 export default async function Login({ searchParams }: { searchParams: { message: string } }) {
   const supabase = createClient();
