@@ -39,7 +39,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({
           <Trash2 />
         </div>
       </header>
-      <h3>12 Hour Status History</h3>
+      <h3>2 Hour Status History</h3>
       <StatusHistory name={name} history={history} />
       <h3>Daily Downtime</h3>
       <ResponsiveContainer width="100%" className="-ml-5 flex-1">
