@@ -12,7 +12,6 @@
     "test-db": "node ./db/scripts/test-connection.js"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.4.2",
     "@next/env": "^14.2.3",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-label": "^2.0.2",
@@ -30,8 +29,7 @@
     "react-dom": "^18",
     "recharts": "^2.12.7",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.8"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",
