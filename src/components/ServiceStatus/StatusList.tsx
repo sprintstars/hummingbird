@@ -58,7 +58,7 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
   const nameFiltered = nameFilter === "" ? filtered : filtered.filter(nameFilterer);
 
   return (
-    <ScrollArea>
+    <ScrollArea className="shadow-ib">
       <div
         className={`flex items-center flex-col gap-4
       h-full rounded-md px-2

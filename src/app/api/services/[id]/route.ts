@@ -9,12 +9,12 @@ export const GET = async (_: Request, { params }: ReqOptions) => {
   try {
     const data = await db.query(
       `
-    SELECT status_history.id, name, healthy, time
+    SELECT status_history.id, name, url, healthy, time
     FROM status_history
     JOIN services on service_id = services.id
     WHERE service_id = $1
     ORDER BY time DESC
-    LIMIT 10;
+    LIMIT 48;
     `,
       [params.id]
     );
@@ -35,6 +35,7 @@ export const GET = async (_: Request, { params }: ReqOptions) => {
 
     const statusHistory = {
       name: data.rows[0].name,
+      url: data.rows[0].url,
       history: data.rows.map(({ healthy, time }) => ({ healthy, time })),
     };
 
