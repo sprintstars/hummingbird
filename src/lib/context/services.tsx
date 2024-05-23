@@ -34,7 +34,7 @@ const ServicesContextProvider: FunctionComponent<ServicesContextProviderProps> =
         window.location.reload();
       }
     };
-    const intervalID = setTimeout(fetchServices, 10_000);
+    const intervalID = setTimeout(fetchServices, 300_000);
     return () => clearTimeout(intervalID);
   }, [services]);
   return <ServicesContext.Provider value={{ services }}>{children}</ServicesContext.Provider>;
