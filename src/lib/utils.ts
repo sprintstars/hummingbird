@@ -13,6 +13,7 @@ export const API = `${process.env.NEXT_PUBLIC_HOSTNAME}/api`;
 export type Service = {
   id: number;
   name: string;
+  url: string;
   time: Date;
   healthy: boolean;
 };
@@ -20,6 +21,7 @@ export type Service = {
 export type ServiceHistory = {
   id: number;
   name: string;
+  url: string;
   history_times: Date[];
   history_health: boolean[];
 };
@@ -39,6 +41,7 @@ export type Validator<T> = (obj: any) => obj is T;
 export const isService: Validator<Service> = (o: any): o is Service =>
   typeof o.id === "number" &&
   typeof o.name === "string" &&
+  typeof o.url === "string" &&
   o.time instanceof Date &&
   typeof o.healthy === "boolean";
 

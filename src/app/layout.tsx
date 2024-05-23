@@ -39,30 +39,36 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <body
         className={`
         ${museoModerno.className}
-        grid grid-cols-6 grid-rows-[3.5rem_2rem_10rem_10rem_1fr_20vh] gap-x-2 gap-y-3
-          md:grid-rows-[3.5rem_2rem_1fr_1fr_1fr_10vh_10vh]
-        min-h-screen
-          md:max-h-screen
-        bg-layout
         `}
       >
-        <header className="col-start-1 col-span-6 px-4 py-2 text-slate-50">
-          <AuthButton />
-        </header>
-        {children}
+        {/* border-x-2 border-teal-600 shadow-xl shadow-teal-600 */}
         <div
           className={`
-        relative
-        col-start-4 col-span-3 row-start-6 row-span-2
+          grid grid-cols-6 grid-rows-[3.5rem_2rem_10rem_10rem_1fr_20vh] gap-x-2 gap-y-3
+          md:grid-rows-[3.5rem_2rem_1fr_1fr_1fr_10vh_10vh]
+          min-h-screen max-w-[100rem] mx-auto
+          md:max-h-screen
+          bg-layout
         `}
         >
-          <Image
-            src="/logo.svg"
-            alt="Hummingbird logo"
-            priority={true}
-            fill={true}
-            className="object-contain object-right"
-          />
+          <header className="col-start-1 col-span-6 px-4 py-2 text-slate-50">
+            <AuthButton />
+          </header>
+          {children}
+          <div
+            className={`
+            relative
+            col-start-4 col-span-3 row-start-6 row-span-2
+          `}
+          >
+            <Image
+              src="/logo.svg"
+              alt="Hummingbird logo"
+              priority={true}
+              fill={true}
+              className="object-contain object-right"
+            />
+          </div>
         </div>
       </body>
     </html>
