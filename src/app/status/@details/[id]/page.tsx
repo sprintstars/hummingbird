@@ -14,7 +14,7 @@ const StatusDetailsView = async ({ params }: { params: { id: string } }) => {
           COUNT(CASE WHEN NOT healthy THEN 1 END) AS false_count,
           COUNT(*) AS total_count
         FROM status_history
-        WHERE "time" >= current_date - interval '11 days' AND service_id = $1
+        WHERE "time" >= current_date - interval '29 days' AND service_id = $1
         GROUP BY extract('day' from "time")
       )
       SELECT
