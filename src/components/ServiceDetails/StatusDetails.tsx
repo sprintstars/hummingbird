@@ -45,7 +45,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({
       <ResponsiveContainer width="100%" className="-ml-5 flex-1">
         <BarChart data={dailyUD}>
           <XAxis
-            label="Days"
+            // label="Days"
             dataKey="day"
             stroke="#888888"
             fontSize={12}
@@ -76,6 +76,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({
           />
         </BarChart>
       </ResponsiveContainer>
+      <div className="self-center pb-4 -mt-3">Days</div>
       <div className="text-center text-xl bg-zinc-200 shadow-md rounded-md px-4 py-6 text-service-up-fg">
         {url}
       </div>
