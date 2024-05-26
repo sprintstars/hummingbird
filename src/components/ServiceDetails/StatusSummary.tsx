@@ -28,9 +28,9 @@ const StatusSummary = () => {
     <>
       <div
         className={`grid grid-cols-[3fr_1fr] gap-[5vh] content-around
-          md:grid-cols-2
+          colbp:grid-cols-2
         col-start-1 col-span-6 row-start-3 row-span-2
-          md:col-start-4 md:col-span-3 md:row-start-3 md:row-span-3
+          colbp:col-start-4 colbp:col-span-3 colbp:row-start-3 colbp:row-span-3
         h-full mx-auto px-10
         text-right text-3xl text-foreground
         lg:text-[3vw]

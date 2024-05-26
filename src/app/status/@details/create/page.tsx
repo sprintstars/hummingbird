@@ -84,7 +84,7 @@ export default function AddService({ searchParams }: { searchParams: { message: 
         <ChevronLeft className="h-4 w-4" />
         Back
       </Link>
-      <div className="bg-cover col-start-1 col-span-6 row-start-3 row-span-3 mx-auto flex flex-col w-full px-8 sm:max-w-md justify-center gap-6">
+      <div className="bg-cover col-start-1 col-span-6 row-start-3 row-span-3 mx-auto flex flex-col w-full px-8 colbp:max-w-md justify-center gap-6">
         <h1 className="text-white text-2xl font-bold mb-4">Add a new service</h1>
         <form className="flex flex-col gap-4">
           <div className="text-white flex flex-col gap-1">

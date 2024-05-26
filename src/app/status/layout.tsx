@@ -58,9 +58,9 @@ WHERE
 
   return (
     <>
-      <main className="md:max-h-screen col-start-1 col-span-6 row-span-4 flex flex-col md:flex-row gap-4 lg:gap-8 p-6 mx-6">
+      <main className="colbp:max-h-screen col-start-1 col-span-6 row-span-4 flex flex-col colbp:flex-row gap-4 lg:gap-8 p-6 mx-6">
         <ServicesContextProvider init={results.rows}>
-          <section className="flex flex-col flex-[2] md:ml-4 rounded-md text-slate-900">
+          <section className="flex flex-col flex-[2] colbp:ml-4 rounded-md text-slate-900">
             {details}
           </section>
           <section className="flex-1 flex flex-col rounded-md gap-4 px-2">{children}</section>

@@ -31,7 +31,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({
     };
   });
   return (
-    <div className="flex-1 flex flex-col rounded-md p-4 bg-foreground">
+    <div className="flex-1 flex flex-col h-full rounded-md p-4 bg-foreground">
       <header className="flex items-center">
         <span className="text-5xl p-4 text-service-up-fg">{name}</span>
         <div className="flex justify-end flex-1 gap-8">
@@ -42,14 +42,14 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({
       <h3>2 Hour Status History</h3>
       <StatusHistory name={name} history={history} />
       <h3>Daily Downtime</h3>
-      <ResponsiveContainer width="100%" className="-ml-5 flex-1">
+      <ResponsiveContainer width="100%" className="-ml-5 flex-1 min-h-40 h-full">
         <BarChart data={dailyUD}>
           <XAxis
             // label="Days"
             dataKey="day"
             stroke="#888888"
             fontSize={12}
-            tickLine={false}
+            tickLine={true}
             axisLine={true}
           />
           <YAxis

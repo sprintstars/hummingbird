@@ -64,7 +64,7 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
         className={`flex items-center flex-col gap-4
       h-full rounded-md px-2
       text-slate-700
-        sm:text-xl
+        colbp:text-xl
       `}
       >
         <Link
@@ -72,10 +72,11 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
           href="/status/create"
         >
           <div
-            className="flex items-center flex-col gap-4
-      h-full rounded-md px-2
-      text-slate-700
-        sm:text-xl"
+            className={`
+            flex items-center flex-col gap-4
+            h-full rounded-md px-2
+          text-slate-700
+              colbp:text-xl`}
           >
             <button
               className="group cursor-pointer outline-none hover:rotate-90 duration-300"

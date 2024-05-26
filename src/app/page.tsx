@@ -59,7 +59,7 @@ export default async function Login({ searchParams }: { searchParams: { message:
 
   return (
     <>
-      <div className="bg-cover col-start-1 col-span-6 row-start-3 row-span-3 mx-auto flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+      <div className="bg-cover col-start-1 col-span-6 row-start-3 row-span-3 mx-auto flex flex-col w-full px-8 colbp:max-w-md justify-center gap-2">
         <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
           <label className="text-md" htmlFor="email">
             Email

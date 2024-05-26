@@ -16,6 +16,9 @@ const config = {
       boxShadow: {
         ib: "inset 0 -1em 0.3em -0.5em rgb(0 0 0 / 30%)",
       },
+      screens: {
+        colbp: { raw: "(min-width:775px) and (min-height: 800px)" },
+      },
       backgroundImage: {
         layout: "linear-gradient(354deg, rgb(221, 221, 221) 20vh, rgb(19, 74, 86) 20.3vh)",
         login: "url(var(--login-img))",
