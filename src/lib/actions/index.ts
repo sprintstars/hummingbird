@@ -113,21 +113,30 @@ export const deleteService = async (formData: FormData) => {
   const serviceId = Number.parseInt(formData.get("serviceId") as string, 10);
 
   if (user && serviceId) {
-    await db.query("DELETE FROM status_owners WHERE service_id = $1 AND user_id = $2", [
-      serviceId,
-      user.id,
-    ]);
-    const statusOwnersResponse = await db.query(
-      "SELECT service_id FROM status_owners WHERE service_id = $1",
-      [serviceId]
-    );
+    try {
+      await db.query("DELETE FROM status_owners WHERE service_id = $1 AND user_id = $2", [
+        serviceId,
+        user.id,
+      ]);
+      const statusOwnersResponse = await db.query(
+        "SELECT service_id FROM status_owners WHERE service_id = $1",
+        [serviceId]
+      );
 
-    if (statusOwnersResponse.rows.length === 0) {
-      await db.query("DELETE FROM status_history WHERE service_id = $1", [serviceId]);
-      await db.query("DELETE FROM services WHERE id = $1", [serviceId]);
+      if (statusOwnersResponse.rows.length === 0) {
+        await db.query("DELETE FROM status_history WHERE service_id = $1", [serviceId]);
+        await db.query("DELETE FROM services WHERE id = $1", [serviceId]);
+      }
+    } catch (err) {
+      console.error(err);
+      redirect(`/status/${serviceId}?message=Fatal error`);
     }
 
     redirect("/status?message=Deleted");
   }
   return redirect(`/status/${serviceId}?message=Please input the correct data`);
+};
+
+export const editService = async (formData: FormData) => {
+  // Todo
 };
