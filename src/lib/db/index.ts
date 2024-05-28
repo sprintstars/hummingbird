@@ -1,15 +1,4 @@
-import pg from "pg";
+import db from "./client";
+import { select, getOneDailyAverageDowntime, getAllServices, getOneService } from "./queries";
 
-const { Pool } = pg;
-
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL_NO_SSL,
-  ssl: {
-    ca: process.env.SUPABASE_CERT,
-  },
-});
-
-pool.on("error", (err) => console.error(err));
-pool.on("connect", () => console.log("connected to the database"));
-
-export default pool;
+export { db, select, getOneDailyAverageDowntime, getAllServices, getOneService };

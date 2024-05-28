@@ -59,57 +59,59 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
   const nameFiltered = nameFilter === "" ? filtered : filtered.filter(nameFilterer);
 
   return (
-    <ScrollArea className="shadow-ib">
-      <div
-        className={`flex items-center flex-col gap-4
+    <>
+      <ScrollArea className="shadow-ib">
+        <div
+          className={`flex items-center flex-col gap-4
       h-full rounded-md px-2
       text-slate-700
         colbp:text-xl
       `}
-      >
-        <Link
-          className="relative w-full max-w-96 border-4 border-transparent flex-auto content-center rounded-md p-2 text-center bg-service-up"
-          href="/status/create"
         >
-          <div
-            className={`
-            flex items-center flex-col gap-4
-            h-full rounded-md px-2
-          text-slate-700
-              colbp:text-xl`}
+          {nameFiltered.map((service) => (
+            <Status
+              id={service.id}
+              key={`${service.name}-${service.history_health[0]}`}
+              name={service.name}
+              healthy={service.history_health[0]}
+              count={sorted.length}
+            />
+          ))}
+        </div>
+      </ScrollArea>
+      <Link
+        className="relative mx-auto max-w-96 p-1 border-4 border-transparent w-[95%] rounded-md text-center bg-service-up"
+        href="/status/create"
+      >
+        <div
+          className={`
+      flex items-center flex-col gap-4
+      h-full rounded-md px-2
+    text-slate-700
+        colbp:text-xl`}
+        >
+          <button
+            className="group cursor-pointer outline-none hover:rotate-90 duration-300"
+            title="Add New"
           >
-            <button
-              className="group cursor-pointer outline-none hover:rotate-90 duration-300"
-              title="Add New"
+            <svg
+              className="stroke-teal-500 fill-none group-active:stroke-teal-200 group-active:duration-0 duration-300"
+              viewBox="0 0 24 24"
+              height="50px"
+              width="50px"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                className="stroke-teal-500 fill-none group-hover:fill-teal-800 group-active:stroke-teal-200 group-active:fill-teal-600 group-active:duration-0 duration-300"
-                viewBox="0 0 24 24"
-                height="50px"
-                width="50px"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeWidth="1.5"
-                  d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
-                ></path>
-                <path strokeWidth="1.5" d="M8 12H16"></path>
-                <path strokeWidth="1.5" d="M12 16V8"></path>
-              </svg>
-            </button>
-          </div>
-        </Link>
-        {nameFiltered.map((service) => (
-          <Status
-            id={service.id}
-            key={`${service.name}-${service.history_health[0]}`}
-            name={service.name}
-            healthy={service.history_health[0]}
-            count={sorted.length}
-          />
-        ))}
-      </div>
-    </ScrollArea>
+              <path
+                strokeWidth="1.5"
+                d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+              ></path>
+              <path strokeWidth="1.5" d="M8 12H16"></path>
+              <path strokeWidth="1.5" d="M12 16V8"></path>
+            </svg>
+          </button>
+        </div>
+      </Link>
+    </>
   );
 };
 

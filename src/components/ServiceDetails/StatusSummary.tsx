@@ -1,9 +1,15 @@
 "use client";
 
 import { useServicesContext } from "@/lib/context/services";
+import { useRouter } from "next/navigation";
 
-const StatusSummary = () => {
-  const { services } = useServicesContext();
+type StatusSummaryProps = {
+  searchParams: { message: string };
+};
+
+const StatusSummary = ({ searchParams }: StatusSummaryProps) => {
+  const { services, refresh } = useServicesContext();
+  const router = useRouter();
   const disruptions = services.reduce(
     (sum, service) => (service.history_health[0] ? sum : sum + 1),
     0
@@ -22,10 +28,19 @@ const StatusSummary = () => {
     }
     return sum;
   }, 0);
-  const isDisruptionsClicked = true;
-  const isOperationalClicked = false;
+
+  if (searchParams.message) {
+    refresh();
+    router.push("/status");
+  }
+
   return (
     <>
+      {searchParams.message && (
+        <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+          {searchParams.message}
+        </p>
+      )}
       <div
         className={`grid grid-cols-[3fr_1fr] gap-[5vh] content-around
           colbp:grid-cols-2
@@ -36,11 +51,7 @@ const StatusSummary = () => {
         lg:text-[3vw]
         `}
       >
-        <span
-          className={`${disruptions > 0 ? "text-service-down font-bold" : ""} ${
-            isDisruptionsClicked ? "underline" : ""
-          }`}
-        >
+        <span className={`${disruptions > 0 ? "text-service-down font-bold" : ""}`}>
           Disruptions
         </span>
         <span
@@ -54,7 +65,7 @@ const StatusSummary = () => {
         </span>
         <span>Resolved</span>
         <span className="flex items-center">{resolved}</span>
-        <span className={`${isOperationalClicked ? "underline" : ""}`}>Operational</span>
+        <span>Operational</span>
         <span className="flex items-center">{operational}</span>
       </div>
     </>

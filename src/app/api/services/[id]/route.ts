@@ -1,47 +1,44 @@
-import db from "@/lib/db";
-import { isServicesArray, makeResponseBody } from "@/lib/utils";
+import { getOneService } from "@/lib/db";
+import { makeResponseBody } from "@/lib/utils";
 
 type ReqOptions = { params: { id: string } };
 
 const headers = { "Content-Type": "application/json" };
 
-export const GET = async (_: Request, { params }: ReqOptions) => {
-  try {
-    const data = await db.query(
-      `
-    SELECT status_history.id, name, url, healthy, time
-    FROM status_history
-    JOIN services on service_id = services.id
-    WHERE service_id = $1
-    ORDER BY time DESC
-    LIMIT 48;
-    `,
-      [params.id]
-    );
+export const GET = async (req: Request, { params }: ReqOptions) => {
+  const requestURL = new URL(req.url);
+  const userId = requestURL.searchParams.get("user");
+  const limit = Number(requestURL.searchParams.get("limit")) ?? 48;
+  const serviceId = Number.parseInt(params.id, 10);
 
-    if (data.rows.length === 0) {
-      return new Response(
-        makeResponseBody("not found", `Could not find the service for id ${params.id}`),
-        { status: 404, headers }
-      );
-    }
-
-    if (!isServicesArray(data.rows)) {
-      return new Response(makeResponseBody("error", "There was a problem with the database"), {
-        status: 500,
-        headers,
-      });
-    }
-
-    const statusHistory = {
-      name: data.rows[0].name,
-      url: data.rows[0].url,
-      history: data.rows.map(({ healthy, time }) => ({ healthy, time })),
-    };
-
-    return new Response(makeResponseBody("ok", statusHistory), { headers });
-  } catch (e) {
-    const message = e instanceof Error ? e.message : "Oops!";
-    return new Response(makeResponseBody("error", message), { status: 500, headers });
+  if (!userId) {
+    return new Response(makeResponseBody("error", "A user must be specified"), {
+      status: 500,
+      headers,
+    });
   }
+
+  if (!Number.isInteger(serviceId)) {
+    return new Response(makeResponseBody("error", `Malformed resource ${serviceId}`), {
+      status: 500,
+      headers,
+    });
+  }
+
+  const result = await getOneService(userId, serviceId, limit);
+
+  if (result.tag === "Result.Err") {
+    return new Response(makeResponseBody("error", result.message), {
+      status: result.code,
+      headers,
+    });
+  }
+
+  const statusHistory = {
+    name: result.name,
+    url: result.url,
+    history: result.history_times.map((time, i) => ({ healthy: result.history_health[i], time })),
+  };
+
+  return new Response(makeResponseBody("ok", statusHistory), { headers });
 };

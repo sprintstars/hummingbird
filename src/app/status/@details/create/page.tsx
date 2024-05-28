@@ -1,6 +1,5 @@
 import { Input } from "@/components/Primitives/Input";
-import { createClient } from "@/lib/supabase/server";
-import db from "@/lib/db";
+import { createService } from "@/lib/actions";
 import {
   Select,
   SelectContent,
@@ -8,76 +7,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/Primitives/Select";
-import { SubmitButton } from "@/components/Auth";
-import { redirect } from "next/navigation";
+import SubmitButton from "@/components/Primitives/SubmitButton";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/Primitives/Dialog";
-
 export default function AddService({ searchParams }: { searchParams: { message: string } }) {
-  // Function to handle form submission
-
-  const createService = async (formData: FormData) => {
-    "use server";
-
-    const supabase = createClient();
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    const serviceName = formData.get("name") as string;
-    const url = formData.get("url") as string;
-    const strategy = formData.get("strategy") as string;
-
-    if (serviceName && url && strategy && user) {
-      const response = await db.query("SELECT id, url from services WHERE url = $1", [url]);
-
-      // if response.rows is empty then add the service
-      if (response.rowCount === 0) {
-        const newServiceResponse = await db.query(
-          "INSERT INTO services (name, url, strategy) VALUES ($1, $2, $3) RETURNING *",
-          [serviceName, url, strategy]
-        );
-
-        // get the id of the newly added service and add it to the user
-
-        await db.query("INSERT INTO status_owners (service_id, user_id) VALUES ($1, $2)", [
-          newServiceResponse.rows[0].id,
-          user.id,
-        ]);
-      } else {
-        // status_owners 2 cols - service_id user_id
-        const statusOwnersResponse = await db.query(
-          "SELECT service_id, user_id FROM status_owners WHERE service_id = $1 AND user_id = $2",
-          [response.rows[0].id, user.id]
-        );
-
-        // if they aren't linked, link them
-
-        if (statusOwnersResponse.rowCount === 0) {
-          //link them
-          await db.query("INSERT INTO status_owners (service_id, user_id) VALUES ($1, $2)", [
-            response.rows[0].id,
-            user.id,
-          ]);
-        } else {
-          redirect("/status/create?message=Already linked");
-          // if they are linked - service already linked and available to the user
-        }
-      }
-
-      return redirect("/status/create?message=Service added successfully");
-    }
-  };
   return (
     <>
       <Link href="/status" className="h-10 p-0 mb-4 text-slate-200 flex items-center">
