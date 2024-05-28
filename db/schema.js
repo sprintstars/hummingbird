@@ -1,6 +1,6 @@
 import SERVICE_SEED_DATA from "./seed/services.js";
+import SERVICE_OWNERS_SEED_DATA from "./seed/service_owners.js";
 import STATUS_HISTORY_SEED_DATA from "./seed/status_history.js";
-import STATUS_OWNERS_SEED_DATA from "./seed/status_owners.js";
 
 const schema = {
   services: {
@@ -12,6 +12,15 @@ const schema = {
     ],
     seed: SERVICE_SEED_DATA,
   },
+  service_owners: {
+    columns: [
+      { name: "id", constraints: "serial PRIMARY KEY" },
+      { name: "name", constraints: "varchar(50)" },
+      { name: "service_id", constraints: "integer REFERENCES services(id)" },
+      { name: "user_id", constraints: "uuid REFERENCES auth.users(id)" },
+    ],
+    seed: SERVICE_OWNERS_SEED_DATA,
+  },
   status_history: {
     columns: [
       { name: "id", constraints: "serial PRIMARY KEY" },
@@ -20,14 +29,6 @@ const schema = {
       { name: "time", constraints: "timestamp DEFAULT CURRENT_TIMESTAMP" },
     ],
     seed: STATUS_HISTORY_SEED_DATA,
-  },
-  status_owners: {
-    columns: [
-      { name: "id", constraints: "serial PRIMARY KEY" },
-      { name: "service_id", constraints: "integer REFERENCES services(id)" },
-      { name: "user_id", constraints: "uuid REFERENCES auth.users(id)" },
-    ],
-    seed: STATUS_OWNERS_SEED_DATA,
   },
 };
 

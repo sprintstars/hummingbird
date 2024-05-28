@@ -66,7 +66,8 @@ export const createService = async (formData: FormData) => {
       );
 
       // get the id of the newly added service and add it to the user
-      await db.query("INSERT INTO status_owners (service_id, user_id) VALUES ($1, $2)", [
+      await db.query("INSERT INTO service_owners (name, service_id, user_id) VALUES ($1, $2, $3)", [
+        serviceName,
         newServiceResponse.rows[0].id,
         user.id,
       ]);
@@ -74,24 +75,24 @@ export const createService = async (formData: FormData) => {
       // Update the status for that service
       await fetch(`${API}/update/${newServiceResponse.rows[0].id}`, {
         headers: {
-          Authorization: "Bearer gCuZI6la0oPpzMTazvQplLtCXFwSw0Ck",
+          Authorization: `Bearer ${process.env.CRON_SECRET}`,
         },
       });
 
       // otherwise check if the user is linked
     } else {
       const statusOwnersResponse = await db.query(
-        "SELECT service_id, user_id FROM status_owners WHERE service_id = $1 AND user_id = $2",
+        "SELECT * FROM service_owners WHERE service_id = $1 AND user_id = $2",
         [response.rows[0].id, user.id]
       );
 
       // if they aren't linked, link them
       if (statusOwnersResponse.rowCount === 0) {
         //link them
-        await db.query("INSERT INTO status_owners (service_id, user_id) VALUES ($1, $2)", [
-          response.rows[0].id,
-          user.id,
-        ]);
+        await db.query(
+          "INSERT INTO service_owners (name, service_id, user_id) VALUES ($1, $2, $3)",
+          [serviceName, response.rows[0].id, user.id]
+        );
         // otherwise display a message informing the user that they are linked already
       } else {
         redirect("/status/create?message=Already linked");
@@ -114,12 +115,12 @@ export const deleteService = async (formData: FormData) => {
 
   if (user && serviceId) {
     try {
-      await db.query("DELETE FROM status_owners WHERE service_id = $1 AND user_id = $2", [
+      await db.query("DELETE FROM service_owners WHERE service_id = $1 AND user_id = $2", [
         serviceId,
         user.id,
       ]);
       const statusOwnersResponse = await db.query(
-        "SELECT service_id FROM status_owners WHERE service_id = $1",
+        "SELECT service_id FROM service_owners WHERE service_id = $1",
         [serviceId]
       );
 

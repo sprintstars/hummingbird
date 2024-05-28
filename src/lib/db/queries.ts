@@ -100,7 +100,7 @@ export const getAllServices = async (
       `
     SELECT
     s.id,
-    s.name,
+    so.name,
     s.url,
     (
     SELECT ARRAY (
@@ -126,7 +126,7 @@ export const getAllServices = async (
   ) AS history_health
   FROM
   services s
-  JOIN status_owners so ON s.id = so.service_id
+  JOIN service_owners so ON s.id = so.service_id
   WHERE
   so.user_id = $1
   `,
@@ -162,7 +162,7 @@ export const getOneService = async (
       `
     SELECT
     s.id,
-    s.name,
+    so.name,
     (
     SELECT ARRAY (
       SELECT sh.time
@@ -187,7 +187,7 @@ export const getOneService = async (
   ) AS history_health
   FROM
   services s
-  JOIN status_owners so ON s.id = so.service_id
+  JOIN service_owners so ON s.id = so.service_id
   WHERE
   so.user_id = $2
   and s.id = $3
