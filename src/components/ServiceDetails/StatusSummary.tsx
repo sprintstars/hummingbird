@@ -1,7 +1,6 @@
 "use client";
 
 import { useServicesContext } from "@/lib/context/services";
-import { useRouter } from "next/navigation";
 
 type StatusSummaryProps = {
   searchParams: { message: string };
@@ -9,7 +8,6 @@ type StatusSummaryProps = {
 
 const StatusSummary = ({ searchParams }: StatusSummaryProps) => {
   const { services, refresh } = useServicesContext();
-  const router = useRouter();
   const disruptions = services.reduce(
     (sum, service) => (service.history_health[0] ? sum : sum + 1),
     0
@@ -30,8 +28,7 @@ const StatusSummary = ({ searchParams }: StatusSummaryProps) => {
   }, 0);
 
   if (searchParams.message) {
-    refresh();
-    router.push("/status");
+    setTimeout(() => refresh(), 3000);
   }
 
   return (
