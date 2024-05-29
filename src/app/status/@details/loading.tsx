@@ -12,7 +12,7 @@ const StatusLoading: FunctionComponent<StatusLoadingProps> = () => {
         <ChevronLeft className="h-4 w-4" />
         Back
       </Link>
-      <div className="w-full flex-1 rounded-md p-4">
+      <div className="flex-1 flex flex-col h-full rounded-md p-4">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" viewBox="0 0 200 200">
           <path fill="none" d="M0 0h200v200H0z"></path>
           <path

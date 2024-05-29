@@ -2,7 +2,11 @@ import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default async function AuthButton() {
+type AuthButtonProps = {
+  className: string;
+};
+
+export default async function AuthButton({ className }: AuthButtonProps) {
   const supabase = createClient();
 
   const {
@@ -18,16 +22,23 @@ export default async function AuthButton() {
   };
 
   return user ? (
-    <div className="flex justify-end items-center gap-4">
-      Hey, {user.email}!
-      <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-          Logout
-        </button>
-      </form>
-    </div>
+    <>
+      <div className="flex items-center">
+        <Link className="" href="/status/create">
+          Add a new service
+        </Link>
+      </div>
+      <div className={`${className} flex justify-end items-center gap-4`}>
+        Hey, {user.email}!
+        <form action={signOut}>
+          <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
+            Logout
+          </button>
+        </form>
+      </div>
+    </>
   ) : (
-    <div className="flex justify-end items-center gap-4">
+    <div className={`${className} flex justify-end items-center gap-4`}>
       <Link
         href="/"
         className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"

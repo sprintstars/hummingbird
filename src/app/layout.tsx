@@ -51,8 +51,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           bg-layout
         `}
         >
-          <header className="col-start-1 col-span-6 px-4 py-2 text-slate-50">
-            <AuthButton />
+          <header className="flex col-start-1 col-span-6 px-4 py-2 text-slate-50">
+            <AuthButton className="flex-1" />
           </header>
           {children}
           <div

@@ -50,7 +50,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
     };
   });
   return (
-    <div className="flex-1 flex flex-col h-full rounded-md p-4 bg-foreground">
+    <div className="flex-1 flex flex-col h-full rounded-md p-4 colbp:p-16 bg-foreground">
       <header className="flex items-center">
         <span className="text-5xl p-4 text-service-up-fg">{service.name}</span>
         <div className="flex justify-end flex-1 gap-8">
