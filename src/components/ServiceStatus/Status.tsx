@@ -40,7 +40,7 @@ const Status: FunctionComponent<ServiceProps> = ({ id, name, healthy, count }) =
   return (
     <Link
       href={`/status/${id}`}
-      className={`relative w-full max-w-96 border-4 border-transparent flex-auto content-center rounded-md p-2 text-center ${bg}`}
+      className={`relative w-full border-4 border-transparent flex-auto content-center rounded-md p-2 text-center ${bg}`}
     >
       <div className={`flex ${count < 5 && "flex-col-reverse gap-4"} items-center`}>
         {healthy ? healthyIcon : unhealthyIcon}
