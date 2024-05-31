@@ -9,7 +9,7 @@ import { ScrollArea } from "@/components/Primitives/Scrollbar";
 import type { FunctionComponent } from "react";
 import type { ServiceHistory } from "@/lib/utils";
 
-export type Order = "up" | "down" | "unordered";
+export type Order = "up" | "down" | "alphabetical";
 export type Filter = "up" | "down" | "unfiltered";
 
 type StatusListProps = {
@@ -21,7 +21,7 @@ type StatusListProps = {
 const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFilter }) => {
   const { services } = useServicesContext();
 
-  const sorter = useCallback(
+  const healthSorter = useCallback(
     (a: ServiceHistory, b: ServiceHistory) => {
       if (a.history_health[0] === b.history_health[0]) {
         return 0;
@@ -43,6 +43,12 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
     [order]
   );
 
+  const alphabeticalSorter = useCallback((a: ServiceHistory, b: ServiceHistory) => {
+    const aName = a.name.toLowerCase();
+    const bName = b.name.toLowerCase();
+    return aName === bName ? 0 : aName > bName ? 1 : -1;
+  }, []);
+
   const filterer = useCallback(
     (s: ServiceHistory) => (filter === "down" ? !s.history_health[0] : s.history_health[0]),
     [filter]
@@ -53,7 +59,10 @@ const StatusList: FunctionComponent<StatusListProps> = ({ order, filter, nameFil
     [nameFilter]
   );
 
-  const sorted = order === "unordered" ? services : [...services].sort(sorter);
+  const sorted =
+    order === "alphabetical"
+      ? [...services].sort(alphabeticalSorter)
+      : [...services].sort(healthSorter);
   const filtered = filter === "unfiltered" ? sorted : sorted.filter(filterer);
   const nameFiltered = nameFilter === "" ? filtered : filtered.filter(nameFilterer);
 

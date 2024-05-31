@@ -48,9 +48,9 @@ export default function ServicesChildren() {
               </SelectItem>
               <SelectItem
                 className="cursor-pointer hover:bg-foreground hover:text-background"
-                value="unordered"
+                value="alphabetical"
               >
-                Unordered
+                Alphabetical
               </SelectItem>
             </SelectContent>
           </Select>
