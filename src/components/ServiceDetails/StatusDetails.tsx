@@ -63,6 +63,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
                 <DialogTitle>Edit {service.name}</DialogTitle>
               </DialogHeader>
               <form className="flex flex-col gap-4">
+                <input type="hidden" name="serviceId" value={id} />
                 <div className="text-white flex flex-col gap-1">
                   <label className="text-white text-md font-medium" htmlFor="name">
                     Name (e.g. Twillio, AWS ...)
@@ -149,7 +150,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
                 <SubmitButton
                   className="text-red-400 font-semibold tracking-wider"
                   formAction={deleteService}
-                  pendingText="Deleteing..."
+                  pendingText="Deleting..."
                 >
                   Delete
                 </SubmitButton>

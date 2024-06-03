@@ -133,11 +133,62 @@ export const deleteService = async (formData: FormData) => {
       redirect(`/status/${serviceId}?message=Fatal error`);
     }
 
-    redirect("/status?message=Deleted");
+    redirect(`/status?message=Deleted`);
   }
   return redirect(`/status/${serviceId}?message=Please input the correct data`);
 };
 
 export const editService = async (formData: FormData) => {
   // Todo
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const serviceId = Number.parseInt(formData.get("serviceId") as string, 10);
+
+  const serviceName = formData.get("name") as string;
+  const url = formData.get("url") as string;
+  const strategy = formData.get("strategy") as string;
+
+  if (user && serviceId && serviceName && url && strategy) {
+    try {
+      const response = await db.query("SELECT * FROM service_owners WHERE service_id = $1", [
+        serviceId,
+      ]);
+      //if url changes and has 1 owner then update the url
+
+      if (response.rows.length === 1) {
+        await db.query("UPDATE services SET url = $1, strategy = $2 WHERE id = $3", [
+          url,
+          strategy,
+          serviceId,
+        ]);
+        await db.query("UPDATE service_owners SET name = $1 WHERE service_id = $2", [
+          serviceName,
+          serviceId,
+        ]);
+      }
+      //if url changes and has more than 1 owner then create a new service
+      //if url doesn't already exists create a new service
+
+      if (response.rows.length > 1 && response.rows[0].url !== url) {
+        await db.query("UPDATE services SET url = $1, strategy = $2 WHERE id = $3", [
+          url,
+          strategy,
+          serviceId,
+        ]);
+        await db.query(
+          "INSERT INTO services (name, url, strategy) VALUES ($1, $2, $3) RETURNING *",
+          [url, strategy, serviceId]
+        );
+      }
+    } catch (err) {
+      console.error(err);
+      redirect(`/status/${serviceId}?message=Fatal error`);
+    }
+    redirect(`/status?message=${serviceName}%20Edited`);
+  }
+  return redirect(`/status/${serviceId}?message=Please input the correct data`);
 };
