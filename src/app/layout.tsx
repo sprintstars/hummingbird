@@ -45,14 +45,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <div
           className={`
           grid grid-cols-6 grid-rows-[3.5rem_2rem_10rem_10rem_1fr_20vh] gap-x-2 gap-y-3
-          md:grid-rows-[3.5rem_2rem_1fr_1fr_1fr_10vh_10vh]
+            colbp:grid-rows-[3.5rem_2rem_1fr_1fr_1fr_10vh_10vh]
           min-h-screen max-w-[100rem] mx-auto
-          md:max-h-screen
+            colbp:max-h-screen
           bg-layout
         `}
         >
-          <header className="col-start-1 col-span-6 px-4 py-2 text-slate-50">
-            <AuthButton />
+          <header className="flex col-start-1 col-span-6 px-4 py-2 text-slate-50">
+            <AuthButton className="flex-1" />
           </header>
           {children}
           <div

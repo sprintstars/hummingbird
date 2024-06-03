@@ -18,6 +18,7 @@ export default function ServicesChildren() {
   const [order, setOrder] = useState<Order>("down");
   const [filter, setFilter] = useState<Filter>("unfiltered");
   const [nameFilter, setNameFilter] = useState<string>("");
+
   return (
     <>
       <div className="flex items-center flex-wrap gap-4 p-2">
@@ -47,9 +48,9 @@ export default function ServicesChildren() {
               </SelectItem>
               <SelectItem
                 className="cursor-pointer hover:bg-foreground hover:text-background"
-                value="unordered"
+                value="alphabetical"
               >
-                Unordered
+                Alphabetical
               </SelectItem>
             </SelectContent>
           </Select>

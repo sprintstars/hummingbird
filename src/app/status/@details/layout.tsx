@@ -6,7 +6,7 @@ type DetailsLayoutProps = {
 };
 
 const DetailsLayout: FunctionComponent<DetailsLayoutProps> = ({ children }) => {
-  return <main className="flex-[2] flex flex-col rounded-md">{children}</main>;
+  return <main className="flex-[2] flex flex-col h-full rounded-md">{children}</main>;
 };
 
 export default DetailsLayout;

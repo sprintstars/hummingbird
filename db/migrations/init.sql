@@ -7,9 +7,10 @@ CREATE TABLE
   )
 
 CREATE TABLE
-  status_owners (
+  service_owners (
     id serial PRIMARY KEY,
-    users_id integer REFERENCES auth.users(id)
+    name varchar(50),
+    users_id integer REFERENCES auth.users(id),
     services_id integer REFERENCES services(id)
   )
 

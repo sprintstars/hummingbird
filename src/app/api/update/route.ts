@@ -1,4 +1,4 @@
-import db from "@/lib/db";
+import { db } from "@/lib/db";
 import { isServiceEnpointArray } from "@/lib/utils";
 
 type StrategyFunction = (url: string) => Promise<boolean>;
@@ -73,8 +73,8 @@ export const GET = async (req: Request) => {
   try {
     await db.query(sql, values);
     return new Response("ok");
-  } catch (e) {
-    const message = e instanceof Error ? e.message : "Oops!";
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Oops!";
     return new Response(message, { status: 500 });
   }
 };

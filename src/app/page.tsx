@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { headers } from "next/headers";
-import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import { SubmitButton } from "@/components/Auth";
+
+import { createClient } from "@/lib/supabase/server";
+import { signIn, signUp } from "@/lib/actions";
+import SubmitButton from "@/components/Primitives/SubmitButton";
 
 export default async function Login({ searchParams }: { searchParams: { message: string } }) {
   const supabase = createClient();
@@ -15,51 +15,9 @@ export default async function Login({ searchParams }: { searchParams: { message:
     return redirect("/status");
   }
 
-  const signIn = async (formData: FormData) => {
-    "use server";
-
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const supabase = createClient();
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      return redirect("/?message=Could not authenticate user");
-    }
-
-    return redirect("/status");
-  };
-
-  const signUp = async (formData: FormData) => {
-    "use server";
-
-    const origin = headers().get("origin");
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const supabase = createClient();
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${origin}/auth/callback`,
-      },
-    });
-
-    if (error) {
-      return redirect("/?message=Could not authenticate user");
-    }
-
-    return redirect("/?message=Check email to continue sign in process");
-  };
-
   return (
     <>
-      <div className="bg-cover col-start-1 col-span-6 row-start-3 row-span-3 mx-auto flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+      <div className="bg-cover col-start-1 col-span-6 row-start-3 row-span-3 mx-auto flex flex-col w-full px-8 colbp:max-w-md justify-center gap-2">
         <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
           <label className="text-md" htmlFor="email">
             Email

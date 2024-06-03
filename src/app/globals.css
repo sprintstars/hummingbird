@@ -31,4 +31,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  svg * {
+    transform-box: fill-box;
+  }
 }
