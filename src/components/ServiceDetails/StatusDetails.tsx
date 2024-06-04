@@ -55,7 +55,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
         <span className="text-5xl p-4 text-service-up-fg">{service.name}</span>
         <div className="flex justify-end flex-1 gap-8">
           <Dialog>
-            <DialogTrigger>
+            <DialogTrigger aria-label="edit service button">
               <PencilLine />
             </DialogTrigger>
             <DialogContent>
@@ -134,7 +134,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
             </DialogContent>
           </Dialog>
           <Dialog>
-            <DialogTrigger>
+            <DialogTrigger aria-label="delete service button">
               <Trash2 />
             </DialogTrigger>
             <DialogContent>
