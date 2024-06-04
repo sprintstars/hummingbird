@@ -4,7 +4,7 @@ import { makeResponseBody } from "@/lib/utils";
 type ReqOptions = { params: { id: string } };
 
 const headers = { "Content-Type": "application/json" };
-
+//GET by id
 export const GET = async (req: Request, { params }: ReqOptions) => {
   const requestURL = new URL(req.url);
   const userId = requestURL.searchParams.get("user");
