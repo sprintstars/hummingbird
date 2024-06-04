@@ -102,17 +102,19 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
                   </label>
 
                   <Select defaultValue="ping" name="strategy">
-                    <SelectTrigger>
+                    <SelectTrigger aria-label="strategy button">
                       <SelectValue placeholder="Strategy" />
                     </SelectTrigger>
                     <SelectContent className="bg-background">
                       <SelectItem
+                        aria-label="ping strategy"
                         className="cursor-pointer hover:bg-foreground hover:text-background"
                         value="ping"
                       >
                         Ping
                       </SelectItem>
                       <SelectItem
+                        aria-label="rss strategy"
                         className="cursor-pointer hover:bg-foreground hover:text-background"
                         value="rss"
                       >
@@ -121,6 +123,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
                       <SelectItem
                         className="cursor-pointer hover:bg-foreground hover:text-background"
                         value="json"
+                        aria-label="json strategy"
                       >
                         JSON
                       </SelectItem>
@@ -148,7 +151,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
               <form>
                 <input type="hidden" name="serviceId" value={id} />
                 <SubmitButton
-                  className="text-red-400 font-semibold tracking-wider"
+                  className="text-red-400 font-semibold tracking-wider text-xl"
                   formAction={deleteService}
                   pendingText="Deleting..."
                 >
