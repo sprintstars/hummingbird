@@ -203,7 +203,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
         </BarChart>
       </ResponsiveContainer>
       <div className="self-center pb-4 -mt-3">Days</div>
-      <div className="text-center text-xl bg-zinc-200 shadow-md rounded-md px-4 py-6 text-service-up-fg">
+      <div className="text-center text-xl bg-zinc-200 shadow-md rounded-md px-4 py-6 text-service-up-fg break-all">
         {service.url}
       </div>
     </div>
