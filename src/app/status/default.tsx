@@ -30,7 +30,7 @@ export default function ServicesChildren() {
               setOrder(value as Order);
             }}
           >
-            <SelectTrigger>
+            <SelectTrigger aria-label="order the services button">
               <SelectValue placeholder="Order" />
             </SelectTrigger>
             <SelectContent className="bg-background">
@@ -63,7 +63,7 @@ export default function ServicesChildren() {
               setFilter(value as Filter);
             }}
           >
-            <SelectTrigger>
+            <SelectTrigger aria-label="filter the services button">
               <SelectValue placeholder="Filter" />
             </SelectTrigger>
             <SelectContent className="bg-background">
