@@ -9,9 +9,9 @@
 
     --accent: 0, 0%, 87%;
     /* pink background */
-    --down-background: 351, 95%, 71%;
+    /* --down-background: 351, 95%, 71%; */
     /* red background (accessible pass rate) */
-    --down-background: 351, 96%, 36%;
+    --down-background: 351, 96%, 47%;
     --down-foreground: 165, 5%, 100%;
     --up-background: 165, 55%, 97%;
     --up-foreground: 165, 60%, 15%;

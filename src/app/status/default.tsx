@@ -22,7 +22,7 @@ export default function ServicesChildren() {
   return (
     <>
       <div className="flex items-center flex-wrap gap-4 p-2">
-        <label className="w-[46%] flex-auto" aria-label="order by up, down or alphabetical order">
+        <label className="w-[46%] flex-auto">
           Order
           <Select
             value={order}

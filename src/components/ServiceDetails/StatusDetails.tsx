@@ -187,7 +187,9 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
           <Bar
             dataKey="down"
             stackId="a"
-            fill="#fb6f84"
+            // fill="#fb6f84"
+            // 428 is red, passes accessibility in lighthouse
+            fill="#EC0428"
             radius={[0, 0, 0, 0]}
             className="fill-primary"
           />
