@@ -55,7 +55,7 @@ export default function ServicesChildren() {
             </SelectContent>
           </Select>
         </label>
-        <label className="w-[46%] flex-auto">
+        <label className="w-[46%] flex-auto" aria-label="filter by up and down statuses ">
           Filter
           <Select
             value={filter}
