@@ -44,7 +44,9 @@ const Status: FunctionComponent<ServiceProps> = ({ id, name, healthy, count }) =
     >
       <div className={`flex ${count < 5 && "flex-col-reverse gap-4"} items-center`}>
         {healthy ? healthyIcon : unhealthyIcon}
-        <span className={`flex-1 ${count < 5 ? "pr-0" : "pr-4"} ${fg}`}>{name}</span>
+        <span className={`flex-1 ${count < 5 ? "pr-0" : "pr-4"} font-bold text-xl ${fg}`}>
+          {name}
+        </span>
       </div>
     </Link>
   );

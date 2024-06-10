@@ -55,7 +55,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
         <span className="text-5xl p-4 text-service-up-fg">{service.name}</span>
         <div className="flex justify-end flex-1 gap-8">
           <Dialog>
-            <DialogTrigger>
+            <DialogTrigger aria-label="edit service button">
               <PencilLine />
             </DialogTrigger>
             <DialogContent>
@@ -102,17 +102,19 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
                   </label>
 
                   <Select defaultValue="ping" name="strategy">
-                    <SelectTrigger>
+                    <SelectTrigger aria-label="strategy button">
                       <SelectValue placeholder="Strategy" />
                     </SelectTrigger>
                     <SelectContent className="bg-background">
                       <SelectItem
+                        aria-label="ping strategy"
                         className="cursor-pointer hover:bg-foreground hover:text-background"
                         value="ping"
                       >
                         Ping
                       </SelectItem>
                       <SelectItem
+                        aria-label="rss strategy"
                         className="cursor-pointer hover:bg-foreground hover:text-background"
                         value="rss"
                       >
@@ -121,6 +123,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
                       <SelectItem
                         className="cursor-pointer hover:bg-foreground hover:text-background"
                         value="json"
+                        aria-label="json strategy"
                       >
                         JSON
                       </SelectItem>
@@ -134,7 +137,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
             </DialogContent>
           </Dialog>
           <Dialog>
-            <DialogTrigger>
+            <DialogTrigger aria-label="delete service button">
               <Trash2 />
             </DialogTrigger>
             <DialogContent>
@@ -148,7 +151,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
               <form>
                 <input type="hidden" name="serviceId" value={id} />
                 <SubmitButton
-                  className="text-red-400 font-semibold tracking-wider"
+                  className="text-red-400 font-semibold tracking-wider text-xl"
                   formAction={deleteService}
                   pendingText="Deleting..."
                 >
@@ -187,7 +190,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
           <Bar
             dataKey="down"
             stackId="a"
-            fill="#fb6f84"
+            fill="#fb5b73"
             radius={[0, 0, 0, 0]}
             className="fill-primary"
           />
@@ -201,7 +204,7 @@ const StatusDetails: FunctionComponent<StatusDetailsProps> = ({ id, dailyAverage
         </BarChart>
       </ResponsiveContainer>
       <div className="self-center pb-4 -mt-3">Days</div>
-      <div className="text-center text-xl bg-zinc-200 shadow-md rounded-md px-4 py-6 text-service-up-fg">
+      <div className="text-center text-xl bg-zinc-200 shadow-md rounded-md px-4 py-6 text-service-up-fg break-all">
         {service.url}
       </div>
     </div>

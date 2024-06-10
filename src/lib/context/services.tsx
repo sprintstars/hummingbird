@@ -11,7 +11,7 @@ import {
 import { isServiceHistoryArray, type ServiceHistory } from "../utils";
 import { createClient } from "../supabase/client";
 
-const servicesEndpoint = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/services`;
+const servicesEndpoint = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/srevices`;
 
 type ServicesContextProviderProps = {
   init: ServiceHistory[];

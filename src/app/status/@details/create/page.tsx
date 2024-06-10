@@ -40,26 +40,32 @@ export default function AddService({ searchParams }: { searchParams: { message: 
               Strategy
             </label>
 
-            <Select name="strategy">
-              <SelectTrigger>
+            <Select name="strategy" aria-label="strategy options dropdown box">
+              <SelectTrigger aria-label="dropdown button to select strategy">
                 <SelectValue placeholder="Strategy" />
               </SelectTrigger>
-              <SelectContent className="bg-background">
+              <SelectContent
+                className="bg-background"
+                aria-label="dropdown button to select strategy"
+              >
                 <SelectItem
                   className="cursor-pointer hover:bg-foreground hover:text-background"
                   value="ping"
+                  aria-label="ping strategy"
                 >
                   Ping
                 </SelectItem>
                 <SelectItem
                   className="cursor-pointer hover:bg-foreground hover:text-background"
                   value="rss"
+                  aria-label="rss strategy"
                 >
                   RSS
                 </SelectItem>
                 <SelectItem
                   className="cursor-pointer hover:bg-foreground hover:text-background"
                   value="json"
+                  aria-label="json strategy"
                 >
                   JSON
                 </SelectItem>
