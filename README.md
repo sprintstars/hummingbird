@@ -44,9 +44,15 @@ Hummingbird gives you the visibility you need to keep your business running smoo
 2. **Intuitive Dashboard:** Quickly assess the status of your entire system.
 3. **Actionable Insights:** Use historical data to make informed decisions.
 
+## 📝 Demo
+
+Watch our 14min demo video here: [https://youtu.be/RXerqapP-ps](https://youtu.be/RXerqapP-ps)
+
 ## 📝 Documentation
 
-Get started with Hummingbird: [https://documentationlink.com](https://documentationlink.com)
+To get started with Hummingbird, visit [https://hummingbird-three.vercel.app/status](https://hummingbird-three.vercel.app/status) to sign up. If you are unable to sign up, please reach out to one of us.
+
+Hummingbird is very simple to use, but you can find our documentation in the Github wiki page for this project: [https://github.com/sprintstars/hummingbird/wiki](https://github.com/sprintstars/hummingbird/wiki)
 
 ## 📜 License
 
