@@ -6,6 +6,11 @@ Markdown
 
 Hummingbird is your early warning system for third-party service outages. We monitor your critical dependencies like website hosting, payment processors, and more, so you can address issues before they impact your customers.
 
+## Navigating this ReadMe
+
+To access the table of contents, click the menu to the right of this readme:
+![WIP](https://github.com/sprintstars/hummingbird/blob/readme/public/images/readme/readmeNavmenu.png)
+
 ## Why Hummingbird?
 
 Unexpected downtime in services like Netlify, Auth0, Stripe, or Twilio can be disastrous:
@@ -48,9 +53,12 @@ Hummingbird gives you the visibility you need to keep your business running smoo
 
 Watch our 14min demo video here: [https://youtu.be/RXerqapP-ps](https://youtu.be/RXerqapP-ps)
 
-## 📝 Documentation
+## 📝 Get Started with Hummingbird
 
-To get started with Hummingbird, visit [https://hummingbird-three.vercel.app/status](https://hummingbird-three.vercel.app/status) to sign up. If you are unable to sign up, please reach out to one of us.
+To get started with Hummingbird, visit [https://hummingbird-three.vercel.app/status](https://hummingbird-three.vercel.app/status) to sign up. If you experience any issues during sign up, please use the following demo account:
+
+**email:** alt.y9-0o0xetvy@yopmail.com  
+**password:** hummingbird
 
 Hummingbird is very simple to use, but you can find our documentation in the Github wiki page for this project: [https://github.com/sprintstars/hummingbird/wiki](https://github.com/sprintstars/hummingbird/wiki)
 
@@ -62,7 +70,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) fi
 
 - David (https://github.com/David-MacD)
 - Mahdi (https://github.com/Satty90)
-- Richard (https://github.com/rikharthulee)
+- ~~Richard (https://github.com/rikharthulee)~~
 - Abida (https://github.com/Abida64)
 - Catherine (https://github.com/csarq)
 
